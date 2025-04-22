@@ -1,0 +1,7 @@
+Credits:
+    Code:
+        https://api.arcade.academy/
+    Media:
+        https://opengameart.org/
+            bevouliin.com - assets/images/bird.png
+            avgvsta - assets/audio/audio.opus
