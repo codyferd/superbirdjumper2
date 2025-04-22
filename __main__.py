@@ -1,6 +1,19 @@
 # Libraries
 import os
+import subprocess
 import sys
+
+# Defining installation function
+def install(libraries):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", libraries])
+
+# Automatically import all required libraries
+required = ["arcade", "screeninfo"]
+for libraries in required:
+    try:
+        __import__(libraries)
+    except ImportError:
+        install(libraries)
 
 # Use script to run the game
 script = os.path.join("superbirdjumper2", "assets", "code", "main.py")

@@ -9,8 +9,9 @@ Find at https://github.com/codyferd/superbirdjumper2/
 = Gameplay
 Super Bird Jumper is a game designed to be a very fun game, that
 is very simplistic, but with a lot of strategy. Jump with either
-the W, A or D key. Combine the keys to get a higher jump. Dodge pipes, and play levels.
+the W, A or D key. Combine the keys to get a higher jump. Dodge
+ pipes, and play levels.
 
 = Installation
-First, install python and then run pip install arcade, and then pip install screeninfo. Then, play by running the
-folder (ex. python superbirdjumper2).
+First, install python, and then, play by running the
+unzipped folder (ex. python superbirdjumper2).
