@@ -2,7 +2,7 @@ image::assets/images/bird.png[]
 
 = *Super Bird Jumper 2*
 
-Version Condor 1.6
+Version Condor 1.7
 
 Find at https://github.com/codyferd/superbirdjumper2/
 
@@ -12,5 +12,5 @@ is very simplistic, but with a lot of strategy. Jump with either
 the W, A or D key. Combine the keys to get a higher jump. Dodge pipes, and play levels.
 
 = Installation
-First, install python and then run pip install arcade. Then, play by running the
+First, install python and then run pip install arcade, and then pip install screeninfo. Then, play by running the
 folder (ex. python superbirdjumper2).

@@ -1,12 +1,18 @@
 # Libraries
 import arcade
+from screeninfo import get_monitors
+
+# Screen setup
+monitor = get_monitors()[0]
+screen_width = monitor.width
+screen_height = monitor.height
 
 # Constants
-window_width = 1920
-window_height = 1000
+window_width = screen_width
+window_height = screen_height - 100
 window_title = "Super Bird Jumper 2"
-bird_speed = 10
 jump_height = 120
+bird_speed = 10
 falling = -6
 
 class GameView(arcade.View):
@@ -22,8 +28,8 @@ class GameView(arcade.View):
         # Sprites
         self.bird_img = arcade.load_texture("superbirdjumper2/assets/images/bird.png")
         self.bird_sprite = arcade.Sprite(self.bird_img)
-        self.bird_sprite.center_x = 400
-        self.bird_sprite.center_y = 900
+        self.bird_sprite.center_x = window_width / 2.6666666
+        self.bird_sprite.center_y = window_height - 100
         # Sprite List
         self.game_list = arcade.SpriteList()
         self.game_list.append(self.bird_sprite)
@@ -56,7 +62,7 @@ class GameOverView(arcade.View):
         self.music = music
     def on_draw(self):
         self.clear()
-        arcade.draw_text("GAME OVER", 960, 500, arcade.color.RED, 60, anchor_x="center")
+        arcade.draw_text("GAME OVER", window_width / 2, window_height / 2, arcade.color.RED, 60, anchor_x="center")
         arcade.draw_text("Press E to Restart", window_width / 2, window_height / 2 - 60, arcade.color.WHITE, 30, anchor_x="center")
     def on_key_press(self, key, modifiers):
         if key == arcade.key.E:
