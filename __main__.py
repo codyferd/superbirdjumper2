@@ -1,7 +1,7 @@
 # Libraries
-import os
-import subprocess
-import sys
+import os # Sys Library
+import subprocess # Sys Library
+import sys # Sys Library
 
 # Defining installation function
 def install(libraries):
