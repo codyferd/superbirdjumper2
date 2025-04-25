@@ -8,7 +8,7 @@ def install(libraries):
     subprocess.check_call([sys.executable, "-m", "pip", "install", libraries])
 
 # Automatically import all required libraries
-required = ["arcade", "screeninfo"]
+required = ["arcade", "numba", "screeninfo"]
 for libraries in required:
     try:
         __import__(libraries)
