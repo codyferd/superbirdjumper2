@@ -28,7 +28,7 @@ class GameView(arcade.View):
         # Sprites
         self.bird_img = arcade.load_texture("superbirdjumper2/assets/images/bird.png")
         self.bird_sprite = arcade.Sprite(self.bird_img)
-        self.bird_sprite.center_x = window_width / 2.6666666
+        self.bird_sprite.center_x = window_width / 4
         self.bird_sprite.center_y = window_height - 100
         # Sprite List
         self.game_list = arcade.SpriteList()
