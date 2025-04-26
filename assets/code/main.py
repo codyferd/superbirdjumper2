@@ -1,6 +1,5 @@
 # Libraries
 import arcade
-from numba import jit
 from screeninfo import get_monitors
 
 # Screen setup
