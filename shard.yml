@@ -1,0 +1,6 @@
+name: superbirdjumper2
+version: 0.1.0
+
+dependencies:
+  chipmunk:
+    github: oprypin/crystal-chipmunk

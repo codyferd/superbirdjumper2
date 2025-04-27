@@ -1,0 +1,6 @@
+version: 2.0
+shards:
+  chipmunk:
+    git: https://github.com/oprypin/crystal-chipmunk.git
+    version: 0.1.0+git.commit.9b403c73f937418676b21de31688cc2373990af8
+

@@ -1,7 +1,5 @@
 Credits:
     Code:
-        https://api.arcade.academy/
-        https://www.toptal.com/developers/gitignore/
     Media:
         https://opengameart.org/
             bevouliin.com - assets/images/bird.png
