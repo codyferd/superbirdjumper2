@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-crystal run main.cr
+crystal run assets/code/main.cr

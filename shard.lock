@@ -4,3 +4,7 @@ shards:
     git: https://github.com/oprypin/crystal-chipmunk.git
     version: 0.1.0+git.commit.9b403c73f937418676b21de31688cc2373990af8
 
+  raylib-cr:
+    git: https://github.com/sol-vin/raylib-cr.git
+    version: 5.0+git.commit.4669fc6d6b1f991b2b9a11452fa37bfc40dfe025
+
