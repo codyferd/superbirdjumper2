@@ -14,4 +14,4 @@ pipes, and play levels.
 
 = Installation
 First, install crystal, and then, play by running the
-unzipped folder (ex. superbirdjumper2/a.sh).
+unzipped folder (ex. ./a.sh).
