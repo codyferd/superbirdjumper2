@@ -1,0 +1,11 @@
+Code:
+Languages:
+    Crystal: Apache License
+Libraries:
+    Chipmunk: MIT License
+    Chipmunk-Crystal: MIT License
+    Raylib: ZLib License
+    CR-Raylib: Apache License
+Media:
+    assets/images/bird.png: CC0 License
+    assets/audio/audio.opus: CC-BY License

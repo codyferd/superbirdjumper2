@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+preferred_shells="zsh ksh fish bash sh"
+
+for shell in $preferred_shells; do
+    shell_path=$(command -v "$shell")
+    if [ -n "$shell_path" ]; then
+        echo "Using $shell for this script..."
+        exec "$shell_path" "$0" "$@"
+        exit 0
+    fi
+done
+
+shards install
+crystal run assets/code/main.cr

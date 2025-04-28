@@ -1,0 +1,33 @@
+*This is a list of approved licenses for integrating code, non-shell languages,*
+*media, and libraries; Any licenses you want to include that are not here,*
+*shall be submitted for review via a github issue. If it is accepted, it will*
+*be added.*
+
+_License Criteria for approved licenses:_
+1. Has to be compatible with the GNU GPL 3.0.
+2. Has to allow full sublicensing, and not be copyleft.
+3. Has to follow all FLOSS guidelines, and be conforming to the Debian FSG and Open Source Defenition guidelines.
+4. Has to only have permissive conditions.
+5. Has to be approved by the author.
+
+Apache License
+BSD 0-Clause License
+BSD 1-Clause License
+BSD 2-Clause License
+BSD 3-Clause License
+Boost Software License
+CC0 License
+CC-BY License
+cURL License
+DWTFYWTPL (WTFPL) License
+Fair License
+ISC License
+MIT License
+MIT-0 License
+NCSA License
+OGA-BY License
+PostgreSQL License
+Python License
+Unlicense License
+X11 License
+Zlib License
