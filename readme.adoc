@@ -13,5 +13,5 @@ the W, A or D key. Combine the keys to get a higher jump. Dodge
 pipes, and play levels.
 
 = Installation
-First, install crystal, and then, play by running the
+First, install crystal and shards, and then, play by running the
 unzipped folder (ex. ./a.sh).
