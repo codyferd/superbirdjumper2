@@ -2,7 +2,7 @@ image::assets/images/bird.png[]
 
 = *Super Bird Jumper 2*
 
-Version Condor 1.8
+Version Condor 1.9
 
 Find at https://github.com/codyferd/superbirdjumper2/
 

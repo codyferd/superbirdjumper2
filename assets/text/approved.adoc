@@ -28,6 +28,7 @@ NCSA License
 OGA-BY License
 PostgreSQL License
 Python License
+UPDL License
 Unlicense License
 X11 License
 Zlib License
