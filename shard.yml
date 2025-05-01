@@ -4,5 +4,5 @@ version: 0.1.0
 dependencies:
   chipmunk:
     github: oprypin/crystal-chipmunk
-  raylib-cr:
-    github: sol-vin/raylib-cr
+  cray:
+    gitlab: Zatherz/cray
