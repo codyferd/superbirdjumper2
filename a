@@ -3,3 +3,4 @@
 cd ~/superbirdjumper2/
 shards install
 crystal run assets/code/main.cr
+rm -rf ~/superbirdjumper2/lib/
