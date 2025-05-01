@@ -4,8 +4,8 @@ require "raylib-cr"
 # Window & Physics Constants
 W = Raylib.get_screen_width()
 H = Raylib.get_screen_height()
-JUMP_FORCE   = CP::Vect.new(0, 300.0)
-GRAVITY      = CP::Vect.new(0, 400.0)  # pixels/sec²
+JUMP_FORCE   = CP::Vect.new(0, -500.0)
+GRAVITY      = CP::Vect.new(0, 400.0)
 BIRD_RADIUS  = 20.0
 
 # Init Raylib window
@@ -33,19 +33,8 @@ until Raylib.close_window?
 
   key = Raylib.get_key_pressed()
 
-  if key == Raylib::KeyboardKey::W ||
-    key == Raylib::KeyboardKey::A ||
-    key == Raylib::KeyboardKey::D
+  if key == 87 || key == 65 || key == 68
     bird_body.apply_impulse_at_world_point(JUMP_FORCE, bird_body.position)
-  end
-  
-  # Quit if Q or ESC pressed
-  if key == Raylib::KeyboardKey::Q || key == Raylib::KeyboardKey::Escape
-    break
-  end
-  
-  if bird_body.position == 0 || bird_body.position == H
-    break
   end
   
   # Get and display FPS
