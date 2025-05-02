@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-cd ~/superbirdjumper2/
-shards install
-crystal run assets/code/main.crs
