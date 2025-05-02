@@ -2,9 +2,10 @@
 require "chipmunk"
 require "cray"
 
+
 # Window & Physics Constants
-W = LibRay.get_screen_width()
-H = LibRay.get_screen_height()
+W = 1920
+H = 1080
 JUMP_FORCE   = CP::Vect.new(0, -250.0)
 GRAVITY      = CP::Vect.new(0, 250.0)
 BIRD_RADIUS  = 20.0
@@ -16,7 +17,7 @@ LibRay.toggle_fullscreen()
 
 # Sound
 LibRay.init_audio_device()
-# audio = LibRay.load_music_stream("assets/audio/audio.ogg")
+# audio = LibRay.load_music_stream("assets/audio/audio.ogg".to_unsafe)
 # LibRay.play_music_stream(audio)
 
 # Set up Chipmunk space
@@ -26,7 +27,7 @@ space.gravity = GRAVITY
 # Bird (dynamic circle)
 bird_texture = LibRay.load_texture("assets/images/bird.png")
 bird_body  = CP::Body.new(1.0, 1.0)
-bird_body.position = CP::Vect.new(500, H * 0.5)
+bird_body.position = CP::Vect.new(W * 0.25, H * 0.5)
 bird_shape = CP::Shape::Circle.new(bird_body, BIRD_RADIUS, CP::Vect.new(0, 0))
 space.add bird_body, bird_shape
 
@@ -45,13 +46,17 @@ until LibRay.window_should_close?
     bird_body.apply_impulse_at_world_point(GRAVITY, bird_body.position)
   end
 
-  if key == 81
+  if bird_body.position.y >= H || bird_body.position.y <= 0
     break
   end
   
-  if key == 69
-    # Special
-  end
+#  if key == 69
+#    # Inventory/shop
+#  end
+#  if key == 81
+#   # Use power-up
+#  end
+
   # Get and display FPS
   fps = LibRay.get_fps()
   LibRay.draw_text("#{fps} FPS", 1800, 10, 20, LibRay::BLACK)
@@ -72,4 +77,4 @@ until LibRay.window_should_close?
 end
 
 LibRay.close_audio_device()
-LibRay.close_window
+LibRay.close_window()
