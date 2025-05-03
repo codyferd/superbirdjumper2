@@ -1,7 +1,6 @@
 # Libraries
 require "chipmunk"
 require "cray"
-require "file_utils"
 
 # Window & Physics Constants
 W = 1920
@@ -50,7 +49,9 @@ until LibRay.window_should_close?
   end
 
   if bird_body.position.y >= H || bird_body.position.y <= 0
-    break
+    LibRay.close_window()
+    LibRay.close_audio_device()
+    Process.exec(Process.executable_path.not_nil!)
   end
   
 #  if key == 69
