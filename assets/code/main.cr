@@ -1,7 +1,7 @@
 # Libraries
 require "chipmunk"
 require "cray"
-
+require "file_utils"
 
 # Window & Physics Constants
 W = 1920
@@ -10,6 +10,9 @@ JUMP_FORCE   = CP::Vect.new(0, -250.0)
 GRAVITY      = CP::Vect.new(0, 250.0)
 BIRD_RADIUS  = 20.0
 
+# AppImage stuff
+asset_path = ENV["ASSET_PATH"]?
+
 # Init LibRay window
 LibRay.init_window(W, H, "Super Bird Jumper 2")
 LibRay.set_target_fps(50)
@@ -17,7 +20,7 @@ LibRay.toggle_fullscreen()
 
 # Sound
 LibRay.init_audio_device()
-# audio = LibRay.load_music_stream("assets/audio/audio.ogg".to_unsafe)
+# audio = LibRay.load_music_stream("#{asset_path}/assets/audio/audio.ogg".to_unsafe)
 # LibRay.play_music_stream(audio)
 
 # Set up Chipmunk space
@@ -25,7 +28,7 @@ space = CP::Space.new
 space.gravity = GRAVITY
 
 # Bird (dynamic circle)
-bird_texture = LibRay.load_texture("assets/images/bird.png")
+bird_texture = LibRay.load_texture("#{asset_path}/assets/images/bird.png")
 bird_body  = CP::Body.new(1.0, 1.0)
 bird_body.position = CP::Vect.new(W * 0.25, H * 0.5)
 bird_shape = CP::Shape::Circle.new(bird_body, BIRD_RADIUS, CP::Vect.new(0, 0))
