@@ -8,6 +8,7 @@ H = 1080
 JUMP_FORCE   = CP::Vect.new(0, -250.0)
 GRAVITY      = CP::Vect.new(0, 250.0)
 BIRD_RADIUS  = 20.0
+game_over    = 0
 
 # AppImage stuff
 asset_path = ENV["ASSET_PATH"]?
@@ -26,12 +27,13 @@ LibRay.init_audio_device()
 space = CP::Space.new
 space.gravity = GRAVITY
 
-# Bird (dynamic circle)
+# Bird
 bird_texture = LibRay.load_texture("#{asset_path}/assets/images/bird.png")
 bird_body  = CP::Body.new(1.0, 1.0)
 bird_body.position = CP::Vect.new(W * 0.25, H * 0.5)
 bird_shape = CP::Shape::Circle.new(bird_body, BIRD_RADIUS, CP::Vect.new(0, 0))
 space.add bird_body, bird_shape
+backround_texture = LibRay.load_texture("#{asset_path}/assets/images/backround.jpg")
 
 # Main Loop
 until LibRay.window_should_close?
@@ -41,7 +43,7 @@ until LibRay.window_should_close?
   key = LibRay.get_key_pressed()
 
   if key == 87 || key == 65 || key == 68
-    bird_body.apply_impulse_at_world_point(JUMP_FORCE, bird_body.position)
+      bird_body.apply_impulse_at_world_point(JUMP_FORCE, bird_body.position)
   end
   
   if key == 83
@@ -49,8 +51,6 @@ until LibRay.window_should_close?
   end
 
   if bird_body.position.y >= H || bird_body.position.y <= 0
-    LibRay.close_window()
-    LibRay.close_audio_device()
     Process.exec(Process.executable_path.not_nil!)
   end
   
@@ -67,7 +67,7 @@ until LibRay.window_should_close?
 
   # Draw
   LibRay.begin_drawing
-  LibRay.clear_background(LibRay::SKYBLUE)
+  LibRay.draw_texture(backround_texture, 0, 0, LibRay::SKYBLUE)
 
   # Draw bird
   LibRay.draw_texture(
