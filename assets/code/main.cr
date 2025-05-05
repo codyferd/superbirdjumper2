@@ -11,7 +11,11 @@ BIRD_RADIUS  = 20.0
 game_over    = 0
 
 # AppImage stuff
-asset_path = ENV["ASSET_PATH"]?
+if Dir.current == "/home/luca/superbirdjumper2"
+  asset_path = "/home/luca/superbirdjumper2"
+else
+  asset_path = ENV["ASSET_PATH"]?
+end
 
 # Init LibRay window
 LibRay.init_window(W, H, "Super Bird Jumper 2")
