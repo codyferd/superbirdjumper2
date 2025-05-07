@@ -4,3 +4,5 @@ Credits:
         https://opengameart.org/
             bevouliin.com - assets/images/bird.png
             avgvsta - assets/audio/audio.opus
+        https://stocksnap.io/
+            bobrichards - assets/images/backround.jpg
