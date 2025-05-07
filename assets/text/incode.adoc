@@ -9,3 +9,4 @@ Libraries:
 Media:
     assets/images/bird.png: CC0 License
     assets/audio/audio.opus: CC-BY License
+    assets/images/backround.jpg CC0 License
