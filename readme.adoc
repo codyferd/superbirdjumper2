@@ -2,7 +2,7 @@ image::assets/images/bird.png[]
 
 = *Super Bird Jumper 2*
 
-Version Condor 1.15
+Version Condor 1.16
 
 Find at https://github.com/codyferd/superbirdjumper2/
 
@@ -13,5 +13,5 @@ the W, A or D key. Anti-Jump with the S key. Combine the keys to
 get a higher jump. Dodge pipes, and play levels.
 
 = Installation
-First, install crystal and shards, and then, play by running the
-AppImage.
+First, install crystal and shards, and then, play by running
+superbirdjumper2.

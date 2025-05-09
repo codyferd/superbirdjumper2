@@ -10,26 +10,23 @@ GRAVITY      = CP::Vect.new(0, 250.0)
 BIRD_RADIUS  = 20.0
 game_over    = false
 
-# AppImage Asset Path
-if Dir.current == "/home/luca/superbirdjumper2"
-  asset_path = "/home/luca/superbirdjumper2"
-else
-  asset_path = ENV["ASSET_PATH"]?
-end
-
 # Init LibRay Window and Audio
 LibRay.init_window(W, H, "Super Bird Jumper 2")
 LibRay.set_target_fps(0)  # Unlimited FPS
 LibRay.toggle_fullscreen()
+
+# Audio
 LibRay.init_audio_device()
+# music = LibRay.load_music_stream("assets/audio/audio.ogg".to_unsafe)
+# LibRay.play_music_stream(music)
 
 # Chipmunk Physics Setup
 space = CP::Space.new
 space.gravity = GRAVITY
 
 # Load Assets
-bird_texture = LibRay.load_texture("#{asset_path}/assets/images/bird.png")
-background_texture = LibRay.load_texture("#{asset_path}/assets/images/backround.jpg")
+bird_texture = LibRay.load_texture("assets/images/bird.png")
+background_texture = LibRay.load_texture("assets/images/backround.jpg")
 
 # Bird Physics Setup
 bird_body = CP::Body.new(1.0, 1.0)
@@ -40,6 +37,7 @@ space.add bird_body, bird_shape
 # Main Game Loop
 until LibRay.window_should_close?
   LibRay.begin_drawing
+  # LibRay.update_music_stream(music)
 
   # Dynamic Framerate Update
   s = LibRay.get_fps()
@@ -53,6 +51,7 @@ until LibRay.window_should_close?
   LibRay.clear_background(LibRay::BLACK)
   LibRay.draw_texture(background_texture, 0, 0, LibRay::SKYBLUE)
 
+  # Game Over
   if game_over
     LibRay.clear_background(LibRay::BLACK)
     LibRay.draw_text("GAME OVER", W//2 - 350, H//2 - 80, 120, LibRay::RED)
