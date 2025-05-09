@@ -12,6 +12,8 @@ is very simplistic, but with a lot of strategy. Jump with either
 the W, A or D key. Anti-Jump with the S key. Combine the keys to
 get a higher jump. Dodge pipes, and play levels.
 
+= Dependencies
+crystal, sh, shards, tar, zstd
+
 = Installation
-First, install crystal and shards, and then, play by running
-superbirdjumper2.
+Play by running superbirdjumper2.run
