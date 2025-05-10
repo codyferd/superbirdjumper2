@@ -5,11 +5,6 @@ require "cray"
 # Window & Physics Constants
 W = 1920
 H = 1080
-PIPE_WIDTH = 100
-PIPE_GAP = 250
-PIPE_SPEED = 200.0
-PIPE_INTERVAL = 2.0  # seconds
-pipe_timer = 0.0
 JUMP_FORCE   = CP::Vect.new(0, -200.0)
 GRAVITY      = CP::Vect.new(0, 250.0)
 BIRD_RADIUS  = 20.0
