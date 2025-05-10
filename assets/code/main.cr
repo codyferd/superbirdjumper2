@@ -5,6 +5,11 @@ require "cray"
 # Window & Physics Constants
 W = 1920
 H = 1080
+PIPE_WIDTH = 100
+PIPE_GAP = 250
+PIPE_SPEED = 200.0
+PIPE_INTERVAL = 2.0  # seconds
+pipe_timer = 0.0
 JUMP_FORCE   = CP::Vect.new(0, -200.0)
 GRAVITY      = CP::Vect.new(0, 250.0)
 BIRD_RADIUS  = 20.0
@@ -17,8 +22,6 @@ LibRay.toggle_fullscreen()
 
 # Audio
 LibRay.init_audio_device()
-# music = LibRay.load_music_stream("assets/audio/audio.ogg".to_unsafe)
-# LibRay.play_music_stream(music)
 
 # Chipmunk Physics Setup
 space = CP::Space.new
@@ -37,7 +40,6 @@ space.add bird_body, bird_shape
 # Main Game Loop
 until LibRay.window_should_close?
   LibRay.begin_drawing
-  # LibRay.update_music_stream(music)
 
   # Dynamic Framerate Update
   s = LibRay.get_fps()
