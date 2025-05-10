@@ -8,5 +8,5 @@ Libraries:
     Cray: MIT License
 Media:
     assets/images/bird.png: CC0 License
-    assets/audio/audio.opus: CC-BY License
-    assets/images/backround.jpg CC0 License
+    assets/images/backround.jpg: CC0 License
+    assets/images/enemy.png: CC-BY License

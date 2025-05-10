@@ -3,6 +3,6 @@ Credits:
     Media:
         https://opengameart.org/
             bevouliin.com - assets/images/bird.png
-            avgvsta - assets/audio/audio.opus
+            jordin.c - assets/images/enemy.png
         https://stocksnap.io/
             bobrichards - assets/images/backround.jpg
