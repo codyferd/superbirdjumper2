@@ -1,9 +1,0 @@
----
-version: 1.0
-shards:
-  chipmunk:
-    git: https://github.com/oprypin/crystal-chipmunk.git
-    version: 0.1.0+git.commit.9b403c73f937418676b21de31688cc2373990af8
-  cray:
-    git: https://gitlab.com/zatherz/cray.git
-    version: 0.1.0+git.commit.56c4d0b3fac626625604a4a96f16e25546fb1506

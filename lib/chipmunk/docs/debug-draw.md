@@ -1,3 +1,0 @@
-::: CP::Space::DebugDraw
-
-::: SFMLDebugDraw

@@ -1,8 +1,0 @@
-Credits:
-    Code:
-    Media:
-        https://opengameart.org/
-            bevouliin.com - assets/images/bird.png
-            jordin.c - assets/images/enemy.png
-        https://stocksnap.io/
-            bobrichards - assets/images/backround.jpg

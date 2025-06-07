@@ -1,3 +1,0 @@
-::: CP::Shape
-
-::: CP::ShapeFilter

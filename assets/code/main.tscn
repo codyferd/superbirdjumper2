@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv0q1u8su7m4u"]
+
+[ext_resource type="Texture2D" uid="uid://45jg35teh5hq" path="res://assets/images/background.webp" id="1_crnqq"]
+[ext_resource type="Texture2D" uid="uid://dxmtne5flkqbe" path="res://assets/images/bird.webp" id="1_g5k2s"]
+[ext_resource type="Script" uid="uid://b4xghyqk277ym" path="res://assets/code/bird.gd" id="3_j88tq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlsva"]
+size = Vector2(54, 41)
+
+[node name="root1" type="Node2D"]
+position = Vector2(420, -1)
+
+[node name="home" type="CharacterBody2D" parent="."]
+
+[node name="background" type="Sprite2D" parent="home"]
+position = Vector2(540, 540)
+texture = ExtResource("1_crnqq")
+
+[node name="bird" type="Sprite2D" parent="home"]
+position = Vector2(-112, 454)
+texture = ExtResource("1_g5k2s")
+script = ExtResource("3_j88tq")
+
+[node name="hitbox" type="CollisionShape2D" parent="home/bird"]
+position = Vector2(-1, -3.5)
+shape = SubResource("RectangleShape2D_vlsva")
