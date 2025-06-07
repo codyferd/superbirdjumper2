@@ -13,4 +13,4 @@ config_version=5
 config/name="Super Bird Jumper 2"
 run/main_scene="uid://bv0q1u8su7m4u"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://dxmtne5flkqbe"

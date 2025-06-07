@@ -29,5 +29,4 @@ func _process(delta):
 		die()
 
 func die():
-	print("Player died!")
 	get_tree().reload_current_scene()

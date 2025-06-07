@@ -1,1 +1,1 @@
-dsd exec str; ""
+dsd exec str; "godot --path ."
