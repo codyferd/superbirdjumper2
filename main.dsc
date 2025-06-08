@@ -1,1 +1,0 @@
-dsd exec str; "godot --path ."
