@@ -1,0 +1,1 @@
+dsd exec str; "./superbirdjumper2.bin"

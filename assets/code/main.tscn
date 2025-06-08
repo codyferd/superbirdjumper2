@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://bv0q1u8su7m4u"]
+
+[ext_resource type="Texture2D" uid="uid://45jg35teh5hq" path="res://assets/images/background.webp" id="1_crnqq"]
+[ext_resource type="Texture2D" uid="uid://dxmtne5flkqbe" path="res://assets/images/bird.webp" id="1_g5k2s"]
+[ext_resource type="Script" uid="uid://ckqj0b7q7e75p" path="res://assets/code/game_over.gd" id="1_xcohl"]
+[ext_resource type="Texture2D" uid="uid://c4y8cvs3lbshx" path="res://assets/images/enemy.webp" id="3_dljn1"]
+[ext_resource type="Script" uid="uid://b4xghyqk277ym" path="res://assets/code/bird.gd" id="3_j88tq"]
+[ext_resource type="AudioStream" uid="uid://cus162pyqbpwe" path="res://assets/audio/audio.ogg" id="4_fl8un"]
+[ext_resource type="Script" uid="uid://ce5n402a4h1gw" path="res://assets/code/enemy.gd" id="4_mmxch"]
+[ext_resource type="Script" uid="uid://btsafu3efo657" path="res://assets/code/fps.gd" id="5_i5w0c"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_i5w0c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmxch"]
+size = Vector2(49, 57)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlsva"]
+size = Vector2(54, 41)
+
+[node name="root" type="Node2D"]
+position = Vector2(420, -1)
+
+[node name="main" type="CharacterBody2D" parent="."]
+
+[node name="game_over" type="Control" parent="main"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xcohl")
+
+[node name="black" type="Sprite2D" parent="main/game_over"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(542.5, 508)
+scale = Vector2(1920, 1760)
+texture = SubResource("CanvasTexture_i5w0c")
+
+[node name="game_over_text" type="Label" parent="main/game_over"]
+layout_mode = 0
+offset_left = 227.0
+offset_top = 248.0
+offset_right = 770.0
+offset_bottom = 385.0
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="quit" type="Button" parent="main/game_over"]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 520.0
+offset_right = 557.0
+offset_bottom = 597.0
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="restart" type="Button" parent="main/game_over"]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 400.0
+offset_right = 593.0
+offset_bottom = 477.0
+theme_override_font_sizes/font_size = 50
+text = "Restart"
+
+[node name="background" type="Sprite2D" parent="main"]
+position = Vector2(540, 540)
+texture = ExtResource("1_crnqq")
+
+[node name="enemy" type="Sprite2D" parent="main"]
+position = Vector2(1158, 479)
+texture = ExtResource("3_dljn1")
+script = ExtResource("4_mmxch")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/enemy"]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_mmxch")
+
+[node name="bird" type="Sprite2D" parent="main"]
+position = Vector2(-112, 454)
+texture = ExtResource("1_g5k2s")
+script = ExtResource("3_j88tq")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/bird"]
+position = Vector2(-1, -3.5)
+shape = SubResource("RectangleShape2D_vlsva")
+
+[node name="audio" type="AudioStreamPlayer2D" parent="main/bird"]
+stream = ExtResource("4_fl8un")
+
+[node name="label" type="CanvasLayer" parent="main"]
+
+[node name="fps" type="Label" parent="main/label"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+script = ExtResource("5_i5w0c")
