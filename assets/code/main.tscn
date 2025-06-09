@@ -70,6 +70,8 @@ text = "Restart"
 position = Vector2(540, 540)
 texture = ExtResource("1_crnqq")
 
+[node name="projectile" type="Sprite2D" parent="main"]
+
 [node name="enemy" type="Sprite2D" parent="main"]
 position = Vector2(1158, 479)
 texture = ExtResource("3_dljn1")
