@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bv0q1u8su7m4u"]
+[gd_scene load_steps=10 format=3 uid="uid://bv0q1u8su7m4u"]
 
 [ext_resource type="Texture2D" uid="uid://45jg35teh5hq" path="res://assets/images/background.webp" id="1_crnqq"]
 [ext_resource type="Texture2D" uid="uid://dxmtne5flkqbe" path="res://assets/images/bird.webp" id="1_g5k2s"]
@@ -10,12 +10,6 @@
 [ext_resource type="Script" uid="uid://btsafu3efo657" path="res://assets/code/fps.gd" id="5_i5w0c"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_i5w0c"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmxch"]
-size = Vector2(49, 57)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlsva"]
-size = Vector2(54, 41)
 
 [node name="root" type="Node2D"]
 position = Vector2(420, -1)
@@ -70,25 +64,15 @@ text = "Restart"
 position = Vector2(540, 540)
 texture = ExtResource("1_crnqq")
 
-[node name="projectile" type="Sprite2D" parent="main"]
-
 [node name="enemy" type="Sprite2D" parent="main"]
 position = Vector2(1158, 479)
 texture = ExtResource("3_dljn1")
 script = ExtResource("4_mmxch")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/enemy"]
-position = Vector2(0.5, 1.5)
-shape = SubResource("RectangleShape2D_mmxch")
-
 [node name="bird" type="Sprite2D" parent="main"]
 position = Vector2(-112, 454)
 texture = ExtResource("1_g5k2s")
 script = ExtResource("3_j88tq")
-
-[node name="hitbox" type="CollisionShape2D" parent="main/bird"]
-position = Vector2(-1, -3.5)
-shape = SubResource("RectangleShape2D_vlsva")
 
 [node name="audio" type="AudioStreamPlayer2D" parent="main/bird"]
 stream = ExtResource("4_fl8un")

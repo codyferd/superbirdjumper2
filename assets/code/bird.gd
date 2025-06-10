@@ -42,6 +42,12 @@ func _process(delta):
 	# Death check
 	if position.y < 0 or position.y > screen_height:
 		die()
+		
+	var dist_x = abs(self.position.x - enemy_node.position.x)
+	var dist_y = abs(self.position.y - enemy_node.position.y)
+	
+	if dist_x <= 50 and dist_y <= 50:
+		die()
 
 func die():
 	if is_dead:
@@ -57,8 +63,8 @@ func die():
 	# Create a fresh tween
 	var tween = create_tween()
 	
-	tween.tween_property(enemy_node, "position", enemy_node.position + Vector2(0, push_down_amount), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(bird_node, "position", bird_node.position + Vector2(0, push_down_amount), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(enemy_node, "position", enemy_node.position + Vector2(0, push_down_amount), 0.01).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(bird_node, "position", bird_node.position + Vector2(0, push_down_amount), 0.01).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(background_node, "position", background_node.position + Vector2(0, push_down_amount), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 	# Tween game_over_ui down from -500 to visible position

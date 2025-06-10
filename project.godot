@@ -14,3 +14,8 @@ config/name="Super Bird Jumper 2"
 run/main_scene="uid://bv0q1u8su7m4u"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://dxmtne5flkqbe"
+
+[rendering]
+
+textures/vram_compression/import_s3tc_bptc=true
+textures/vram_compression/import_etc2_astc=true

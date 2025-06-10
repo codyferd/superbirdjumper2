@@ -1,18 +1,32 @@
 extends Sprite2D
 
-var tween = create_tween()
+var y_tween: Tween
+var x_tween: Tween
+var push_tween: Tween
+
+# Y range
+@export var y_min := 200
+@export var y_max := 800
 
 func _ready():
-	# Start looping tween up and down
-	tween.tween_property(self, "position:y", 800, 2.0)
-	tween.tween_property(self, "position:y", 200, 2.0)
-	tween.set_loops()
+	start_x_loop()
+	start_random_y_loop()
 
-func push_down(amount: float = 100):
-	# Stop the existing looping tween so it doesn't override
-	if tween.is_valid():
-		tween.kill()
+func start_x_loop():
+	x_tween = create_tween()
+	x_tween.set_loops()
+	x_tween.tween_property(self, "position:x", 1200, 2.0)
+	x_tween.tween_property(self, "position:x", -200, 2.0)
 
-	# Create a new tween to push down and keep it there
-	var push_tween = create_tween()
-	push_tween.tween_property(self, "position", position + Vector2(0, amount), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+func start_random_y_loop():
+	do_random_y_tween()
+
+func do_random_y_tween():
+	# Pick a new Y target
+	var new_y = randf_range(y_min, y_max)
+	y_tween = create_tween()
+	y_tween.tween_property(self, "position:y", new_y, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	y_tween.tween_callback(Callable(self, "do_random_y_tween"))
+
+func push_down(amount: float = 1000):
+	y_tween.kill()

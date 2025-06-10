@@ -1,0 +1,155 @@
+#!/bin/sh
+set -eu
+
+# DSA Maker: Create/extract self-executing .dsa bundles
+# Supports optional zstd compression and execution via `main.dsc`
+
+usage() {
+  cat <<EOF
+
+Welcome to the Dynamic Self-Extracting Archive Tool!
+
+Usage:
+  dsa [n] [m] [l]
+  dsa x <archive.dsa> [<outdir>]
+
+Modes:
+  (no args)    Create executable .dsa (requires main.dsc)
+  n            Create non-executable .dsa
+  x <file>     Extract .dsa archive
+
+Flags (after 'n' or no args):
+  m            No compression
+  l            Low compression (zstd -1)
+
+Examples:
+  dsa
+  dsa n m
+  dsa x archive.dsa /output
+EOF
+  exit 1
+}
+
+MODE="exe"
+COMPRESS=1
+ZSTD_LEVEL=19
+
+# ─── Extract Mode ───────────────────────────────
+if [ $# -gt 0 ]; then
+  case "$1" in
+    x)
+      [ $# -ge 2 ] && [ $# -le 3 ] || usage
+      ARCHIVE="$2"
+      OUTDIR="${3:-.}"
+      [ -f "$ARCHIVE" ] || { echo "Error: '$ARCHIVE' not found"; exit 1; }
+
+      SKIP=$(awk '/^__ARCHIVE_BELOW__$/ { print NR + 1; exit }' "$ARCHIVE")
+      [ -n "$SKIP" ] || { echo "Error: archive marker not found"; exit 1; }
+
+      TMPFILE=$(mktemp)
+      tail -n +"$SKIP" "$ARCHIVE" > "$TMPFILE"
+
+      HEADER=$(head -n1 "$TMPFILE")
+      mkdir -p "$OUTDIR"
+      if [ "$HEADER" = "__USE_ZSTD__" ]; then
+        tail -n +2 "$TMPFILE" | zstd -d | tar -xf - -C "$OUTDIR"
+      else
+        tar -xf "$TMPFILE" -C "$OUTDIR"
+      fi
+
+      rm -f "$TMPFILE"
+      echo "Extracted to: $OUTDIR"
+      exit 0
+      ;;
+    n)
+      MODE="nonexe"
+      shift
+      ;;
+  esac
+fi
+
+# ─── Flags ───────────────────────────────────────
+while [ $# -gt 0 ]; do
+  case "$1" in
+    m) COMPRESS=0 ;;
+    l) ZSTD_LEVEL=1 ;;
+    *) usage ;;
+  esac
+  shift
+done
+
+APPDIR="$(pwd)"
+BASE="$(basename "$APPDIR")"
+OUT="${BASE}.dsa"
+
+[ "$MODE" = "exe" ] && [ ! -f "$APPDIR/main.dsc" ] && {
+  echo "Error: main.dsc missing"
+  exit 1
+}
+
+# ─── Create Executable ──────────────────────────
+{
+  cat <<'EOF'
+#!/bin/sh
+set -eu
+
+SELF="$0"
+MARKER="__ARCHIVE_BELOW__"
+
+# Find archive start line
+LINE_NUM=$(awk "/^$MARKER\$/{ print NR + 1; exit }" "$SELF")
+[ -n "$LINE_NUM" ] || { echo "Error: corrupt archive"; exit 1; }
+
+# Clean up dead DSA temp dirs
+for DIR in /tmp/dsa.*; do
+  [ -d "$DIR" ] || continue
+  PID_FILE="$DIR/pid"
+  if [ -f "$PID_FILE" ]; then
+    PID=$(cat "$PID_FILE")
+    if ! kill -0 "$PID" 2>/dev/null; then
+      rm -rf -- "$DIR"
+    fi
+  else
+    rm -rf -- "$DIR"
+  fi
+done
+
+# Setup temp
+TMPDIR="/tmp/dsa.$$"
+mkdir -p "$TMPDIR"
+echo "$$" > "$TMPDIR/pid"
+trap 'rm -rf "$TMPDIR"' EXIT INT TERM
+
+# Read archive header and extract accordingly
+HEADER=$(tail -n +"$LINE_NUM" "$SELF" | head -n1)
+PAYLOAD_START=$((LINE_NUM + 1))
+
+if [ "$HEADER" = "__USE_ZSTD__" ]; then
+  tail -n +"$PAYLOAD_START" "$SELF" | zstd -d | tar -xf - -C "$TMPDIR"
+else
+  tail -n +"$LINE_NUM" "$SELF" | tar -xf - -C "$TMPDIR"
+fi
+
+cd "$TMPDIR"
+chmod -R u+rw .
+
+# Find and run command from main.dsc
+CMD=$(awk -F '"' '/^dsd exec str;/ { print $2; exit }' main.dsc)
+[ -z "$CMD" ] && { echo "Error: no execution command found in main.dsc"; exit 1; }
+
+exec sh -c "$CMD" "$@"
+
+__ARCHIVE_BELOW__
+EOF
+
+  if [ "$COMPRESS" -eq 0 ]; then
+    tar --exclude="$OUT" -cf - -C "$APPDIR" .
+  else
+    echo "__USE_ZSTD__"
+    tar --exclude="$OUT" -cf - -C "$APPDIR" . | zstd -$ZSTD_LEVEL --stdout
+  fi
+} > "$OUT"
+
+chmod +x "$OUT"
+echo "Created: $OUT"
+exit 0
