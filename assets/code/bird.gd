@@ -1,7 +1,7 @@
 extends Node2D
 
-const GRAVITY = 600.0
-const JUMP_VELOCITY = -320.0
+const GRAVITY = 500.0
+const JUMP_VELOCITY = -250.0
 
 var velocity = Vector2.ZERO
 var screen_height = 0
@@ -12,6 +12,7 @@ var is_dead = false
 @onready var bird_node = $"../bird"  # Adjust path if needed
 @onready var enemy_node = $"../enemy"
 @onready var background_node = $"../background"  # Adjust path if needed
+@onready var pipe_node = $"../pipemaster"
 
 func _ready():
 	screen_height = get_viewport_rect().size.y
@@ -45,7 +46,7 @@ func _process(delta):
 		
 	var dist_x = abs(self.position.x - enemy_node.position.x)
 	var dist_y = abs(self.position.y - enemy_node.position.y)
-	
+
 	if dist_x <= 50 and dist_y <= 50:
 		die()
 
@@ -64,6 +65,7 @@ func die():
 	var tween = create_tween()
 	
 	tween.tween_property(enemy_node, "position", enemy_node.position + Vector2(0, push_down_amount), 0.01).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(pipe_node, "position", pipe_node.position + Vector2(0, push_down_amount), 0.01).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(bird_node, "position", bird_node.position + Vector2(0, push_down_amount), 0.01).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(background_node, "position", background_node.position + Vector2(0, push_down_amount), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	

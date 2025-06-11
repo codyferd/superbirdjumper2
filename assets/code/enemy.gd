@@ -15,8 +15,8 @@ func _ready():
 func start_x_loop():
 	x_tween = create_tween()
 	x_tween.set_loops()
-	x_tween.tween_property(self, "position:x", 1200, 2.0)
-	x_tween.tween_property(self, "position:x", -200, 2.0)
+	x_tween.tween_property(self, "position:x", 1200, 4.0)
+	x_tween.tween_property(self, "position:x", -200, 4.0)
 
 func start_random_y_loop():
 	do_random_y_tween()

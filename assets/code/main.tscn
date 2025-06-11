@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bv0q1u8su7m4u"]
+[gd_scene load_steps=12 format=3 uid="uid://bv0q1u8su7m4u"]
 
 [ext_resource type="Texture2D" uid="uid://45jg35teh5hq" path="res://assets/images/background.webp" id="1_crnqq"]
 [ext_resource type="Texture2D" uid="uid://dxmtne5flkqbe" path="res://assets/images/bird.webp" id="1_g5k2s"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://cus162pyqbpwe" path="res://assets/audio/audio.ogg" id="4_fl8un"]
 [ext_resource type="Script" uid="uid://ce5n402a4h1gw" path="res://assets/code/enemy.gd" id="4_mmxch"]
 [ext_resource type="Script" uid="uid://btsafu3efo657" path="res://assets/code/fps.gd" id="5_i5w0c"]
+[ext_resource type="Texture2D" uid="uid://dr2y28dywyo58" path="res://assets/images/pipe.webp" id="9_db4g3"]
+[ext_resource type="Script" uid="uid://drkslh4rhfnnk" path="res://assets/code/pipemaster.gd" id="9_noool"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_i5w0c"]
 
@@ -87,3 +89,38 @@ offset_left = -40.0
 offset_bottom = 23.0
 grow_horizontal = 0
 script = ExtResource("5_i5w0c")
+
+[node name="pipemaster" type="Sprite2D" parent="main"]
+position = Vector2(117, 543.5)
+scale = Vector2(1, 0.997222)
+script = ExtResource("9_noool")
+
+[node name="pipe1" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(46, -263.476)
+scale = Vector2(1, 0.512987)
+texture = ExtResource("9_db4g3")
+
+[node name="pipe2" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(673, 298.579)
+scale = Vector2(1, 0.44429)
+texture = ExtResource("9_db4g3")
+
+[node name="pipe3" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(673, -342.201)
+scale = Vector2(1, 0.367224)
+texture = ExtResource("9_db4g3")
+
+[node name="pipe4" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(37, 381.811)
+scale = Vector2(1, 0.303157)
+texture = ExtResource("9_db4g3")
+
+[node name="pipe5" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(1164, -283.159)
+scale = Vector2(1, 0.480729)
+texture = ExtResource("9_db4g3")
+
+[node name="pipe6" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(1164, 354.485)
+scale = Vector2(1, 0.340765)
+texture = ExtResource("9_db4g3")
