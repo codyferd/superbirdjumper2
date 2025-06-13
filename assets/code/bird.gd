@@ -1,7 +1,7 @@
 extends Node2D
 
-const GRAVITY = 500.0
-const JUMP_VELOCITY = -250.0
+const GRAVITY = 750.0
+const JUMP_VELOCITY = -350.0
 
 var velocity = Vector2.ZERO
 var screen_height = 0
@@ -13,6 +13,7 @@ var is_dead = false
 @onready var enemy_node = $"../enemy"
 @onready var background_node = $"../background"  # Adjust path if needed
 @onready var pipe_node = $"../pipemaster"
+@onready var score_noe = $"../label/score"
 
 func _ready():
 	screen_height = get_viewport_rect().size.y
@@ -41,7 +42,7 @@ func _process(delta):
 	position.y += velocity.y * delta
 
 	# Death check
-	if position.y < 0 or position.y > screen_height:
+	if position.y < 0 or position.y > 1080:
 		die()
 		
 	var dist_x = abs(self.position.x - enemy_node.position.x)
@@ -53,11 +54,16 @@ func _process(delta):
 func die():
 	if is_dead:
 		return  # Prevent multiple calls
-
+	
 	is_dead = true
+	emit_signal("died")
 	game_over_ui.visible = true
-
-	var push_down_amount = 1080  # Pixels to push gameplay elements down
+	
+	var score_label = get_node_or_null("../label/score")
+	if score_label:
+		score_label.visible = false
+	
+	var push_down_amount = 2000  # Pixels to push gameplay elements down
 	var target_ui_y = 100       # Final Y position of game_over_ui to slide it into view
 	enemy_node.push_down(push_down_amount)
 	

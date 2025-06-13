@@ -1,44 +1,38 @@
-extends Sprite2D
+extends Node2D  # Attach this to your "pipemaster" node
+
+const START_X      := 1300       # Starting X position (off-screen right)
+const END_X        := -500       # When pipes go off-screen left
+const SPEED        := 400        # Speed of movement
+const PAIR_SPACING := 500        # Distance between pipe pairs
+
+var pipe_pairs = []
 
 func _ready():
-	for pipe in get_children():
-		if pipe is Sprite2D:
-			if pipe.name == "pipe1" or pipe.name == "pipe4":
-				var tweens = create_tween()
-				tweens.set_loops()
-				tweens.tween_property(pipe, "position:x", 1300, 0)
-				tweens.tween_property(pipe, "position:x", -500, 3.0)
-			elif pipe.name == "pipe2" or pipe.name == "pipe3":
-				pipe.set_meta("repeat_count", 0)
-				move_pipe_with_repeats(pipe)
-			elif pipe.name == "pipe5" or pipe.name == "pipe6":
-				pipe.set_meta("repeat_count", 0)
-				move_pipe(pipe)
+	pipe_pairs = [
+		[get_node("pipe1"), get_node("pipe4")],
+		[get_node("pipe2"), get_node("pipe3")],
+		[get_node("pipe5"), get_node("pipe6")]
+	]
 
-func move_pipe_with_repeats(pipe: Node2D):
-	var count = pipe.get_meta("repeat_count")
-	if count < 1:
-		pipe.set_meta("repeat_count", count + 1)
-		var tween = create_tween()
-		tween.tween_property(pipe, "position:x", 1300, 0)
-		tween.tween_property(pipe, "position:x", -500, 5.0)
-		tween.tween_callback(Callable(func(): move_pipe_with_repeats(pipe)))
-	else:
-		var tween = create_tween()
-		tween.tween_property(pipe, "position:x", 1300, 0)
-		tween.tween_property(pipe, "position:x", -500, 3.0)
-		tween.set_loops()
+	# Set starting positions for each pair
+	for i in range(pipe_pairs.size()):
+		var pair = pipe_pairs[i]
+		var start_x = START_X + i * PAIR_SPACING
+		for pipe in pair:
+			pipe.position.x = start_x
 
-func move_pipe(pipe: Node2D):
-	var count = pipe.get_meta("repeat_count")
-	if count < 1:
-		pipe.set_meta("repeat_count", count + 1)
-		var tween = create_tween()
-		tween.tween_property(pipe, "position:x", 1300, 0)
-		tween.tween_property(pipe, "position:x", -500, 7.0)
-		tween.tween_callback(Callable(func(): move_pipe_with_repeats(pipe)))
-	else:
-		var tween = create_tween()
-		tween.tween_property(pipe, "position:x", 1300, 0)
-		tween.tween_property(pipe, "position:x", -500, 3.0)
-		tween.set_loops()
+func _process(delta):
+	for pair in pipe_pairs:
+		var x = pair[0].position.x - SPEED * delta
+
+		if x <= END_X:
+			x += PAIR_SPACING * pipe_pairs.size()  # wrap around
+
+			# Random vertical offset between -200 and +200
+			var offset_y = randf_range(-200, 200)
+			for pipe in pair:
+				pipe.position.y += offset_y
+
+		# Apply same new X position
+		for pipe in pair:
+			pipe.position.x = x

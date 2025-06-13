@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bv0q1u8su7m4u"]
+[gd_scene load_steps=21 format=3 uid="uid://bv0q1u8su7m4u"]
 
 [ext_resource type="Texture2D" uid="uid://45jg35teh5hq" path="res://assets/images/background.webp" id="1_crnqq"]
 [ext_resource type="Texture2D" uid="uid://dxmtne5flkqbe" path="res://assets/images/bird.webp" id="1_g5k2s"]
@@ -9,9 +9,34 @@
 [ext_resource type="Script" uid="uid://ce5n402a4h1gw" path="res://assets/code/enemy.gd" id="4_mmxch"]
 [ext_resource type="Script" uid="uid://btsafu3efo657" path="res://assets/code/fps.gd" id="5_i5w0c"]
 [ext_resource type="Texture2D" uid="uid://dr2y28dywyo58" path="res://assets/images/pipe.webp" id="9_db4g3"]
+[ext_resource type="Script" uid="uid://23n5xoi3xgky" path="res://assets/code/score.gd" id="9_l3qta"]
 [ext_resource type="Script" uid="uid://drkslh4rhfnnk" path="res://assets/code/pipemaster.gd" id="9_noool"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_i5w0c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3qta"]
+size = Vector2(50, 57)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_de533"]
+size = Vector2(54, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u23o4"]
+size = Vector2(129, 1086.87)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_86a7r"]
+size = Vector2(127, 1080.54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4sqrs"]
+size = Vector2(129, 1095.02)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32mhw"]
+size = Vector2(130, 1091.58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aflkg"]
+size = Vector2(125, 1080.53)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1543"]
+size = Vector2(130, 1079.99)
 
 [node name="root" type="Node2D"]
 position = Vector2(420, -1)
@@ -71,6 +96,10 @@ position = Vector2(1158, 479)
 texture = ExtResource("3_dljn1")
 script = ExtResource("4_mmxch")
 
+[node name="hitbox" type="CollisionShape2D" parent="main/enemy"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_l3qta")
+
 [node name="bird" type="Sprite2D" parent="main"]
 position = Vector2(-112, 454)
 texture = ExtResource("1_g5k2s")
@@ -79,16 +108,27 @@ script = ExtResource("3_j88tq")
 [node name="audio" type="AudioStreamPlayer2D" parent="main/bird"]
 stream = ExtResource("4_fl8un")
 
+[node name="hitbox" type="CollisionShape2D" parent="main/bird"]
+position = Vector2(-1, -4)
+shape = SubResource("RectangleShape2D_de533")
+
 [node name="label" type="CanvasLayer" parent="main"]
 
 [node name="fps" type="Label" parent="main/label"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
+offset_right = 40.0
 offset_bottom = 23.0
-grow_horizontal = 0
 script = ExtResource("5_i5w0c")
+
+[node name="score" type="Label" parent="main/label"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+script = ExtResource("9_l3qta")
 
 [node name="pipemaster" type="Sprite2D" parent="main"]
 position = Vector2(117, 543.5)
@@ -96,31 +136,55 @@ scale = Vector2(1, 0.997222)
 script = ExtResource("9_noool")
 
 [node name="pipe1" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(46, -263.476)
-scale = Vector2(1, 0.512987)
+position = Vector2(46, -387.577)
+scale = Vector2(1, 0.742804)
 texture = ExtResource("9_db4g3")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe1"]
+position = Vector2(-2.5, -5.38727)
+shape = SubResource("RectangleShape2D_u23o4")
 
 [node name="pipe2" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(673, 298.579)
-scale = Vector2(1, 0.44429)
+position = Vector2(673, 445.738)
+scale = Vector2(1, 0.716807)
 texture = ExtResource("9_db4g3")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe2"]
+position = Vector2(0.5, 2.52795)
+shape = SubResource("RectangleShape2D_86a7r")
 
 [node name="pipe3" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(673, -342.201)
-scale = Vector2(1, 0.367224)
+position = Vector2(673, -461.282)
+scale = Vector2(1, 0.587744)
 texture = ExtResource("9_db4g3")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe3"]
+position = Vector2(2.5, -4.77777)
+shape = SubResource("RectangleShape2D_4sqrs")
 
 [node name="pipe4" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(37, 381.811)
-scale = Vector2(1, 0.303157)
+position = Vector2(37, 531.477)
+scale = Vector2(1, 0.580315)
 texture = ExtResource("9_db4g3")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe4"]
+position = Vector2(1, -0.828125)
+shape = SubResource("RectangleShape2D_32mhw")
 
 [node name="pipe5" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(1164, -283.159)
-scale = Vector2(1, 0.480729)
+position = Vector2(1164, -397.103)
+scale = Vector2(1, 0.691737)
 texture = ExtResource("9_db4g3")
 
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe5"]
+position = Vector2(0.5, -0.266235)
+shape = SubResource("RectangleShape2D_aflkg")
+
 [node name="pipe6" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(1164, 354.485)
-scale = Vector2(1, 0.340765)
+position = Vector2(1164, 505.152)
+scale = Vector2(1, 0.619779)
 texture = ExtResource("9_db4g3")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe6"]
+position = Vector2(1, -1.47192)
+shape = SubResource("RectangleShape2D_l1543")
