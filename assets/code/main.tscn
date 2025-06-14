@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bv0q1u8su7m4u"]
+[gd_scene load_steps=17 format=3 uid="uid://bv0q1u8su7m4u"]
 
 [ext_resource type="Texture2D" uid="uid://45jg35teh5hq" path="res://assets/images/background.webp" id="1_crnqq"]
 [ext_resource type="Texture2D" uid="uid://dxmtne5flkqbe" path="res://assets/images/bird.webp" id="1_g5k2s"]
@@ -19,18 +19,6 @@ size = Vector2(50, 57)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_de533"]
 size = Vector2(54, 42)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u23o4"]
-size = Vector2(129, 1086.87)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_86a7r"]
-size = Vector2(127, 1080.54)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4sqrs"]
-size = Vector2(129, 1095.02)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_32mhw"]
-size = Vector2(130, 1091.58)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aflkg"]
 size = Vector2(125, 1080.53)
@@ -55,8 +43,8 @@ script = ExtResource("1_xcohl")
 [node name="black" type="Sprite2D" parent="main/game_over"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-position = Vector2(542.5, 508)
-scale = Vector2(1920, 1760)
+position = Vector2(542.5, 553.5)
+scale = Vector2(1920, 2195)
 texture = SubResource("CanvasTexture_i5w0c")
 
 [node name="game_over_text" type="Label" parent="main/game_over"]
@@ -92,7 +80,7 @@ position = Vector2(540, 540)
 texture = ExtResource("1_crnqq")
 
 [node name="enemy" type="Sprite2D" parent="main"]
-position = Vector2(1158, 479)
+position = Vector2(1087, 479)
 texture = ExtResource("3_dljn1")
 script = ExtResource("4_mmxch")
 
@@ -136,55 +124,75 @@ scale = Vector2(1, 0.997222)
 script = ExtResource("9_noool")
 
 [node name="pipe1" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(46, -387.577)
-scale = Vector2(1, 0.742804)
+position = Vector2(-390, -551.031)
+scale = Vector2(1, 0.986073)
 texture = ExtResource("9_db4g3")
 
 [node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe1"]
-position = Vector2(-2.5, -5.38727)
-shape = SubResource("RectangleShape2D_u23o4")
+position = Vector2(0.5, -0.266235)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_aflkg")
 
 [node name="pipe2" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(673, 445.738)
-scale = Vector2(1, 0.716807)
+position = Vector2(107, -554.039)
+scale = Vector2(1, 0.999072)
 texture = ExtResource("9_db4g3")
 
 [node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe2"]
-position = Vector2(0.5, 2.52795)
-shape = SubResource("RectangleShape2D_86a7r")
-
-[node name="pipe3" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(673, -461.282)
-scale = Vector2(1, 0.587744)
-texture = ExtResource("9_db4g3")
-
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe3"]
-position = Vector2(2.5, -4.77777)
-shape = SubResource("RectangleShape2D_4sqrs")
-
-[node name="pipe4" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(37, 531.477)
-scale = Vector2(1, 0.580315)
-texture = ExtResource("9_db4g3")
-
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe4"]
-position = Vector2(1, -0.828125)
-shape = SubResource("RectangleShape2D_32mhw")
-
-[node name="pipe5" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(1164, -397.103)
-scale = Vector2(1, 0.691737)
-texture = ExtResource("9_db4g3")
-
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe5"]
 position = Vector2(0.5, -0.266235)
 shape = SubResource("RectangleShape2D_aflkg")
 
+[node name="pipe3" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(617, -555.543)
+scale = Vector2(1, 0.987001)
+texture = ExtResource("9_db4g3")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe3"]
+position = Vector2(0.5, -0.266235)
+shape = SubResource("RectangleShape2D_aflkg")
+
+[node name="pipe4" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(1106, -554.039)
+scale = Vector2(1, 0.991643)
+texture = ExtResource("9_db4g3")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe4"]
+position = Vector2(0.5, -0.266235)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_aflkg")
+
+[node name="pipe5" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(-398, 660.836)
+scale = Vector2(1, 0.823584)
+texture = ExtResource("9_db4g3")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe5"]
+position = Vector2(1, -1.47192)
+shape = SubResource("RectangleShape2D_l1543")
+
 [node name="pipe6" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(1164, 505.152)
-scale = Vector2(1, 0.619779)
+position = Vector2(112, 658.83)
+scale = Vector2(1, 0.812442)
 texture = ExtResource("9_db4g3")
 
 [node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe6"]
+position = Vector2(1, -1.47192)
+shape = SubResource("RectangleShape2D_l1543")
+
+[node name="pipe7" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(621, 666.853)
+scale = Vector2(1, 0.81987)
+texture = ExtResource("9_db4g3")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe7"]
+position = Vector2(1, -1.47192)
+shape = SubResource("RectangleShape2D_l1543")
+
+[node name="pipe8" type="Sprite2D" parent="main/pipemaster"]
+position = Vector2(1106, 660.836)
+scale = Vector2(1, 0.823584)
+texture = ExtResource("9_db4g3")
+
+[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe8"]
 position = Vector2(1, -1.47192)
 shape = SubResource("RectangleShape2D_l1543")

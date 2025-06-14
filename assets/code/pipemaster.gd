@@ -9,9 +9,10 @@ var pipe_pairs = []
 
 func _ready():
 	pipe_pairs = [
-		[get_node("pipe1"), get_node("pipe4")],
-		[get_node("pipe2"), get_node("pipe3")],
-		[get_node("pipe5"), get_node("pipe6")]
+		[get_node("pipe1"), get_node("pipe5")],
+		[get_node("pipe2"), get_node("pipe6")],
+		[get_node("pipe3"), get_node("pipe7")],
+		[get_node("pipe4"), get_node("pipe8")]
 	]
 
 	# Set starting positions for each pair
@@ -28,8 +29,8 @@ func _process(delta):
 		if x <= END_X:
 			x += PAIR_SPACING * pipe_pairs.size()  # wrap around
 
-			# Random vertical offset between -200 and +200
-			var offset_y = randf_range(-200, 200)
+			# Random vertical offset between -250 and +250
+			var offset_y = randf_range(-250, 250)
 			for pipe in pair:
 				pipe.position.y += offset_y
 
