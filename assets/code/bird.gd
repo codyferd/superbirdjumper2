@@ -2,25 +2,31 @@ extends Node2D
 
 const GRAVITY = 750.0
 const JUMP_VELOCITY = -350.0
+signal died
 
+var alive = false
 var velocity = Vector2.ZERO
 var screen_height = 0
 var is_dead = false
 
 @onready var audio_player = $audio
-@onready var game_over_ui = $"../game_over"
+@onready var start = $"../start"
 @onready var bird_node = self
 @onready var enemy_node = $"../enemy"
 @onready var background_node = $"../background"
 @onready var pipe_node = $"../pipemaster"
-@onready var score_noe = $"../label/score"
+@onready var score_node = $"../label/score"
 
 func _ready():
+	if not get_tree().has_meta("from_restart") or get_tree().get_meta("from_restart") == false:
+		call_deferred("die") # First time: trigger game over
+	else:
+		get_tree().set_meta("from_restart", false)  # Clear the flag after use
+
 	screen_height = get_viewport_rect().size.y
 	audio_player.play()
-
-	game_over_ui.position.y = -500
-	game_over_ui.visible = false
+	start.position.y = -500
+	start.visible = false
 
 func _process(delta):
 	if is_dead:
@@ -75,24 +81,22 @@ func is_touching_pipe() -> bool:
 	return false
 
 func die():
+	
 	if is_dead:
 		return
 	
 	is_dead = true
 	emit_signal("died")
-	game_over_ui.visible = true
-
-	var score_label = get_node_or_null("../label/score")
-	if score_label:
-		score_label.visible = false
+	start.visible = true
+	score_node.visible = false
 
 	var push_down_amount = 10000
 	var target_ui_y = 100
 	enemy_node.push_down(push_down_amount)
 
 	var tween = create_tween()
-	tween.tween_property(enemy_node, "position", enemy_node.position + Vector2(0, push_down_amount), 0.01).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(pipe_node, "position", pipe_node.position + Vector2(0, push_down_amount), 0.01).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(bird_node, "position", bird_node.position + Vector2(0, push_down_amount), 0.01).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(background_node, "position", background_node.position + Vector2(0, push_down_amount), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(game_over_ui, "position", Vector2(game_over_ui.position.x, target_ui_y), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(enemy_node, "position", enemy_node.position + Vector2(0, push_down_amount), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(pipe_node, "position", pipe_node.position + Vector2(0, push_down_amount), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(bird_node, "position", bird_node.position + Vector2(0, push_down_amount), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(background_node, "position", background_node.position + Vector2(0, push_down_amount), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(start, "position", Vector2(start.position.x, target_ui_y), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

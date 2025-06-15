@@ -19,8 +19,13 @@ func _ready():
 	for i in range(pipe_pairs.size()):
 		var pair = pipe_pairs[i]
 		var start_x = START_X + i * PAIR_SPACING
+
+		# Add random offset
+		var offset_y = randf_range(-250, 250)
+
 		for pipe in pair:
 			pipe.position.x = start_x
+			pipe.position.y += offset_y
 
 func _process(delta):
 	for pair in pipe_pairs:

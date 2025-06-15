@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://45jg35teh5hq" path="res://assets/images/background.webp" id="1_crnqq"]
 [ext_resource type="Texture2D" uid="uid://dxmtne5flkqbe" path="res://assets/images/bird.webp" id="1_g5k2s"]
-[ext_resource type="Script" uid="uid://ckqj0b7q7e75p" path="res://assets/code/game_over.gd" id="1_xcohl"]
+[ext_resource type="Script" uid="uid://ds5kwo8xs3kb6" path="res://assets/code/start.gd" id="1_l3qta"]
 [ext_resource type="Texture2D" uid="uid://c4y8cvs3lbshx" path="res://assets/images/enemy.webp" id="3_dljn1"]
 [ext_resource type="Script" uid="uid://b4xghyqk277ym" path="res://assets/code/bird.gd" id="3_j88tq"]
 [ext_resource type="AudioStream" uid="uid://cus162pyqbpwe" path="res://assets/audio/audio.ogg" id="4_fl8un"]
@@ -12,7 +12,11 @@
 [ext_resource type="Script" uid="uid://23n5xoi3xgky" path="res://assets/code/score.gd" id="9_l3qta"]
 [ext_resource type="Script" uid="uid://drkslh4rhfnnk" path="res://assets/code/pipemaster.gd" id="9_noool"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_i5w0c"]
+[sub_resource type="GDScript" id="GDScript_l3qta"]
+script/source = "extends Node2D
+
+var noload = true
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l3qta"]
 size = Vector2(50, 57)
@@ -28,36 +32,35 @@ size = Vector2(130, 1079.99)
 
 [node name="root" type="Node2D"]
 position = Vector2(420, -1)
+script = SubResource("GDScript_l3qta")
 
 [node name="main" type="CharacterBody2D" parent="."]
 
-[node name="game_over" type="Control" parent="main"]
+[node name="start" type="Control" parent="main"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_xcohl")
+script = ExtResource("1_l3qta")
 
-[node name="black" type="Sprite2D" parent="main/game_over"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-position = Vector2(542.5, 553.5)
-scale = Vector2(1920, 2195)
-texture = SubResource("CanvasTexture_i5w0c")
+[node name="background" type="Sprite2D" parent="main/start"]
+position = Vector2(540, 560)
+scale = Vector2(1, 2.02963)
+texture = ExtResource("1_crnqq")
 
-[node name="game_over_text" type="Label" parent="main/game_over"]
+[node name="main_text" type="Label" parent="main/start"]
 layout_mode = 0
-offset_left = 227.0
-offset_top = 248.0
-offset_right = 770.0
-offset_bottom = 385.0
+offset_left = 20.0
+offset_top = 228.0
+offset_right = 988.0
+offset_bottom = 365.0
 theme_override_font_sizes/font_size = 100
-text = "Game Over"
+text = "Super Bird Jumper 2"
 horizontal_alignment = 1
 
-[node name="quit" type="Button" parent="main/game_over"]
+[node name="quit_btn" type="Button" parent="main/start"]
 layout_mode = 0
 offset_left = 444.0
 offset_top = 520.0
@@ -66,14 +69,23 @@ offset_bottom = 597.0
 theme_override_font_sizes/font_size = 50
 text = "Quit"
 
-[node name="restart" type="Button" parent="main/game_over"]
+[node name="start_btn" type="Button" parent="main/start"]
 layout_mode = 0
 offset_left = 410.0
 offset_top = 400.0
 offset_right = 593.0
 offset_bottom = 477.0
 theme_override_font_sizes/font_size = 50
-text = "Restart"
+text = "Start"
+
+[node name="version" type="Label" parent="main/start"]
+layout_mode = 0
+offset_left = -404.0
+offset_top = 946.0
+offset_right = -348.0
+offset_bottom = 969.0
+theme_override_font_sizes/font_size = 20
+text = "Vänern"
 
 [node name="background" type="Sprite2D" parent="main"]
 position = Vector2(540, 540)
@@ -89,7 +101,7 @@ position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_l3qta")
 
 [node name="bird" type="Sprite2D" parent="main"]
-position = Vector2(-112, 454)
+position = Vector2(-107, 454)
 texture = ExtResource("1_g5k2s")
 script = ExtResource("3_j88tq")
 
@@ -99,24 +111,6 @@ stream = ExtResource("4_fl8un")
 [node name="hitbox" type="CollisionShape2D" parent="main/bird"]
 position = Vector2(-1, -4)
 shape = SubResource("RectangleShape2D_de533")
-
-[node name="label" type="CanvasLayer" parent="main"]
-
-[node name="fps" type="Label" parent="main/label"]
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("5_i5w0c")
-
-[node name="score" type="Label" parent="main/label"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 50
-script = ExtResource("9_l3qta")
 
 [node name="pipemaster" type="Sprite2D" parent="main"]
 position = Vector2(117, 543.5)
@@ -130,7 +124,6 @@ texture = ExtResource("9_db4g3")
 
 [node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe1"]
 position = Vector2(0.5, -0.266235)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_aflkg")
 
 [node name="pipe2" type="Sprite2D" parent="main/pipemaster"]
@@ -158,7 +151,6 @@ texture = ExtResource("9_db4g3")
 
 [node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe4"]
 position = Vector2(0.5, -0.266235)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_aflkg")
 
 [node name="pipe5" type="Sprite2D" parent="main/pipemaster"]
@@ -196,3 +188,22 @@ texture = ExtResource("9_db4g3")
 [node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe8"]
 position = Vector2(1, -1.47192)
 shape = SubResource("RectangleShape2D_l1543")
+
+[node name="label" type="CanvasLayer" parent="main"]
+
+[node name="fps" type="Label" parent="main/label"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("5_i5w0c")
+
+[node name="score" type="Label" parent="main/label"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -145.0
+offset_right = 44.0
+offset_bottom = 69.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Score: 0"
+script = ExtResource("9_l3qta")
