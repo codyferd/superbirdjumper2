@@ -85,7 +85,7 @@ offset_top = 946.0
 offset_right = -348.0
 offset_bottom = 969.0
 theme_override_font_sizes/font_size = 20
-text = "Vänern"
+text = "Version 1.1 Sjonsjo"
 
 [node name="background" type="Sprite2D" parent="main"]
 position = Vector2(540, 540)
@@ -118,7 +118,7 @@ scale = Vector2(1, 0.997222)
 script = ExtResource("9_noool")
 
 [node name="pipe1" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(-390, -551.031)
+position = Vector2(-390, -577)
 scale = Vector2(1, 0.986073)
 texture = ExtResource("9_db4g3")
 
@@ -127,7 +127,7 @@ position = Vector2(0.5, -0.266235)
 shape = SubResource("RectangleShape2D_aflkg")
 
 [node name="pipe2" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(107, -554.039)
+position = Vector2(107, -577)
 scale = Vector2(1, 0.999072)
 texture = ExtResource("9_db4g3")
 
@@ -136,7 +136,7 @@ position = Vector2(0.5, -0.266235)
 shape = SubResource("RectangleShape2D_aflkg")
 
 [node name="pipe3" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(617, -555.543)
+position = Vector2(620, -577)
 scale = Vector2(1, 0.987001)
 texture = ExtResource("9_db4g3")
 
@@ -145,7 +145,7 @@ position = Vector2(0.5, -0.266235)
 shape = SubResource("RectangleShape2D_aflkg")
 
 [node name="pipe4" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(1106, -554.039)
+position = Vector2(1106, -577)
 scale = Vector2(1, 0.991643)
 texture = ExtResource("9_db4g3")
 
@@ -154,7 +154,7 @@ position = Vector2(0.5, -0.266235)
 shape = SubResource("RectangleShape2D_aflkg")
 
 [node name="pipe5" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(-398, 660.836)
+position = Vector2(-390, 660)
 scale = Vector2(1, 0.823584)
 texture = ExtResource("9_db4g3")
 
@@ -163,7 +163,7 @@ position = Vector2(1, -1.47192)
 shape = SubResource("RectangleShape2D_l1543")
 
 [node name="pipe6" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(112, 658.83)
+position = Vector2(107, 660)
 scale = Vector2(1, 0.812442)
 texture = ExtResource("9_db4g3")
 
@@ -172,7 +172,7 @@ position = Vector2(1, -1.47192)
 shape = SubResource("RectangleShape2D_l1543")
 
 [node name="pipe7" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(621, 666.853)
+position = Vector2(620, 660)
 scale = Vector2(1, 0.81987)
 texture = ExtResource("9_db4g3")
 
@@ -181,7 +181,7 @@ position = Vector2(1, -1.47192)
 shape = SubResource("RectangleShape2D_l1543")
 
 [node name="pipe8" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(1106, 660.836)
+position = Vector2(1106, 660)
 scale = Vector2(1, 0.823584)
 texture = ExtResource("9_db4g3")
 

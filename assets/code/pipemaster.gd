@@ -21,7 +21,7 @@ func _ready():
 		var start_x = START_X + i * PAIR_SPACING
 
 		# Add random offset
-		var offset_y = randf_range(-250, 250)
+		var offset_y = randf_range(-200, 200)
 
 		for pipe in pair:
 			pipe.position.x = start_x

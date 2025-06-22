@@ -1,6 +1,6 @@
 = *Super Bird Jumper 2*
 
-Version Condor 1.22
+Version 2.1 Sjonsjo
 
 Find at https://github.com/codyferd/superbirdjumper2/
 

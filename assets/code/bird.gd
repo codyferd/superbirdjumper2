@@ -37,11 +37,11 @@ func _process(delta):
 	var keys_pressed = 0
 
 	if Input.is_key_pressed(KEY_W):
-		keys_pressed += 1
+		keys_pressed = 1
 	if Input.is_key_pressed(KEY_A):
-		keys_pressed += 1
+		keys_pressed = 0.01
 	if Input.is_key_pressed(KEY_D):
-		keys_pressed += 1
+		keys_pressed = 2
 
 	if keys_pressed > 0:
 		velocity.y = JUMP_VELOCITY * keys_pressed

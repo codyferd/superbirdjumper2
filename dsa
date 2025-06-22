@@ -2,7 +2,7 @@
 set -eu
 
 # DSA Maker: Create/extract self-executing .dsa bundles
-# Supports optional zstd compression and execution via `main.dsc`
+# Supports optional zstd compression and execution via `main`
 
 usage() {
   cat <<EOF
@@ -14,7 +14,7 @@ Usage:
   dsa x <archive.dsa> [<outdir>]
 
 Modes:
-  (no args)    Create executable .dsa (requires main.dsc)
+  (no args)    Create executable .dsa (requires main)
   n            Create non-executable .dsa
   x <file>     Extract .dsa archive
 
@@ -82,8 +82,8 @@ APPDIR="$(pwd)"
 BASE="$(basename "$APPDIR")"
 OUT="${BASE}.dsa"
 
-[ "$MODE" = "exe" ] && [ ! -f "$APPDIR/main.dsc" ] && {
-  echo "Error: main.dsc missing"
+[ "$MODE" = "exe" ] && [ ! -f "$APPDIR/main" ] && {
+  echo "Error: main missing"
   exit 1
 }
 
@@ -101,7 +101,7 @@ LINE_NUM=$(awk "/^$MARKER\$/{ print NR + 1; exit }" "$SELF")
 [ -n "$LINE_NUM" ] || { echo "Error: corrupt archive"; exit 1; }
 
 # Clean up dead DSA temp dirs
-for DIR in /tmp/dsa.*; do
+for DIR in "$HOME"/.dsa/dsa.*; do
   [ -d "$DIR" ] || continue
   PID_FILE="$DIR/pid"
   if [ -f "$PID_FILE" ]; then
@@ -115,7 +115,7 @@ for DIR in /tmp/dsa.*; do
 done
 
 # Setup temp
-TMPDIR="/tmp/dsa.$$"
+TMPDIR="$HOME/.dsa/dsa.$$"
 mkdir -p "$TMPDIR"
 echo "$$" > "$TMPDIR/pid"
 trap 'rm -rf "$TMPDIR"' EXIT INT TERM
@@ -133,9 +133,9 @@ fi
 cd "$TMPDIR"
 chmod -R u+rw .
 
-# Find and run command from main.dsc
-CMD=$(awk -F '"' '/^dsd exec str;/ { print $2; exit }' main.dsc)
-[ -z "$CMD" ] && { echo "Error: no execution command found in main.dsc"; exit 1; }
+# Find and run command from main
+CMD=$(awk -F '=' '/^exec=/ { gsub(/^[ \t"]+|[ \t"]+$/, "", $2); print $2; exit }' main)
+[ -z "$CMD" ] && { echo "Error: no execution command found in main"; exit 1; }
 
 exec sh -c "$CMD" "$@"
 
@@ -143,7 +143,7 @@ __ARCHIVE_BELOW__
 EOF
 
   if [ "$COMPRESS" -eq 0 ]; then
-    tar --exclude="$OUT" -cf - -C "$APPDIR" .
+    tar --exclude="$OUT" --exclude="pid" -cf - -C "$APPDIR" .
   else
     echo "__USE_ZSTD__"
     tar --exclude="$OUT" -cf - -C "$APPDIR" . | zstd -$ZSTD_LEVEL --stdout
