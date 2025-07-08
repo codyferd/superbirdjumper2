@@ -1,7 +1,0 @@
-[Flatpak Ref]
-Title=Super Bird Jumper 2
-Name=com.codyferd.superbirdjumper2
-Branch=stable
-Url=https://codyferd.github.io/superbirdjumper2/superbirdjumper2/flatpak/repo
-Runtime=org.freedesktop.Platform//24.08
-Sdk=org.freedesktop.Sdk//24.08
