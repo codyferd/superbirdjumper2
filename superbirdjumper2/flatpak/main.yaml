@@ -1,0 +1,29 @@
+app-id: com.codyferd.superbirdjumper2
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: superbirdjumper2.bin
+modules:
+  - name: main
+    buildsystem: simple
+    build-commands:
+      - install -D superbirdjumper2.bin /app/bin/superbirdjumper2.bin
+    sources:
+      - type: dir
+        path: src
+
+finish-args:
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --socket=pulseaudio            # For PulseAudio
+  - --filesystem=xdg-run/pipewire-0  # Needed for some PipeWire setups
+  - --share=network                # If your app uses the internet
+  - --socket=pcsc                  # Smart card access (if needed)
+  - --talk-name=org.freedesktop.Notifications  # Notifications
+  - --device=all                   # Gamepads, joystick, etc.
+  - --allow=bluetooth              # Bluetooth input (optional)
+  - --filesystem=home              # Read/write home folder
+  - --talk-name=org.freedesktop.secrets  # For password/keyring use
+  - --allow=devel
+  - --env=G_MESSAGES_DEBUG=all
