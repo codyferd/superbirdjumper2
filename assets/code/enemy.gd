@@ -2,7 +2,6 @@ extends Sprite2D
 
 var y_tween: Tween
 var x_tween: Tween
-var push_tween: Tween
 
 # Y range
 @export var y_min := 200
@@ -10,16 +9,13 @@ var push_tween: Tween
 
 func _ready():
 	start_x_loop()
-	start_random_y_loop()
+	do_random_y_tween()
 
 func start_x_loop():
 	x_tween = create_tween()
 	x_tween.set_loops()
-	x_tween.tween_property(self, "position:x", 1500, 5.0)
-	x_tween.tween_property(self, "position:x", -200, 5.0)
-
-func start_random_y_loop():
-	do_random_y_tween()
+	x_tween.tween_property(self, "position:x", 1250, 5.0)
+	x_tween.tween_property(self, "position:x", 250, 5.0)
 
 func do_random_y_tween():
 	# Pick a new Y target
@@ -29,4 +25,5 @@ func do_random_y_tween():
 	y_tween.tween_callback(Callable(self, "do_random_y_tween"))
 
 func push_down(amount: float = 1000):
-	y_tween.kill()
+	if y_tween:
+		y_tween.kill()

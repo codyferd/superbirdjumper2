@@ -1,11 +1,9 @@
 = *Super Bird Jumper 2*
 
-Version 2.1 Sjonsjo
+Version 2.2 Flamsjon
 
 Find at https://github.com/codyferd/superbirdjumper2/
 
 = Gameplay
 Super Bird Jumper is a game designed to be a very fun game, that
-is very simplistic, but with a lot of strategy. Jump with either
-the W, A or D key. Anti-Jump with the S key. Combine the keys to
-get a higher jump. Dodge pipes, and play levels.
+is very simplistic, but with a lot of strategy. Dodge pipes, and play levels.

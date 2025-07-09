@@ -1,8 +1,8 @@
 extends Node2D  # Attach this to your "pipemaster" node
 
-const START_X      := 1300       # Starting X position (off-screen right)
+const START_X      := 1000       # Starting X position (off-screen right)
 const END_X        := -500       # When pipes go off-screen left
-const SPEED        := 400        # Speed of movement
+const SPEED        := 500        # Speed of movement
 const PAIR_SPACING := 500        # Distance between pipe pairs
 
 var pipe_pairs = []

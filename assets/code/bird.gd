@@ -1,21 +1,18 @@
 extends Node2D
 
-const GRAVITY = 750.0
-const JUMP_VELOCITY = -350.0
-signal died
+const GRAVITY = 1000.0
+const JUMP_VELOCITY = -500.0
 
-var alive = false
 var velocity = Vector2.ZERO
-var screen_height = 0
 var is_dead = false
 
 @onready var audio_player = $audio
 @onready var start = $"../start"
-@onready var bird_node = self
 @onready var enemy_node = $"../enemy"
 @onready var background_node = $"../background"
 @onready var pipe_node = $"../pipemaster"
 @onready var score_node = $"../label/score"
+@onready var high_node = $"../start/high_score"
 
 func _ready():
 	if not get_tree().has_meta("from_restart") or get_tree().get_meta("from_restart") == false:
@@ -23,7 +20,6 @@ func _ready():
 	else:
 		get_tree().set_meta("from_restart", false)  # Clear the flag after use
 
-	screen_height = get_viewport_rect().size.y
 	audio_player.play()
 	start.position.y = -500
 	start.visible = false
@@ -33,23 +29,19 @@ func _process(delta):
 		return
 
 	velocity.y += GRAVITY * delta
-
+	position.y += velocity.y * delta
+	
 	var keys_pressed = 0
 
-	if Input.is_key_pressed(KEY_W):
-		keys_pressed = 1
+	# --- Keyboard Input ---
 	if Input.is_key_pressed(KEY_A):
-		keys_pressed = 0.01
-	if Input.is_key_pressed(KEY_D):
-		keys_pressed = 2
-
-	if keys_pressed > 0:
-		velocity.y = JUMP_VELOCITY * keys_pressed
-
-	if Input.is_key_pressed(KEY_S):
-		velocity.y += GRAVITY * delta * 3
-
-	position.y += velocity.y * delta
+		velocity.y = JUMP_VELOCITY * 0.1
+	elif Input.is_key_pressed(KEY_W):
+		velocity.y = JUMP_VELOCITY
+	elif Input.is_key_pressed(KEY_D):
+		velocity.y = JUMP_VELOCITY * 2
+	elif Input.is_key_pressed(KEY_S):
+		velocity.y += GRAVITY * delta * 2
 
 	# Death by screen bounds
 	if position.y < 0 or position.y > 1080:
@@ -86,17 +78,18 @@ func die():
 		return
 	
 	is_dead = true
-	emit_signal("died")
 	start.visible = true
-	score_node.visible = false
+	score_node.visible = true
 
 	var push_down_amount = 10000
-	var target_ui_y = 100
+	var target_ui_y = 0
+	score_node.frozen = true
+	high_node.frozen = true
 	enemy_node.push_down(push_down_amount)
 
 	var tween = create_tween()
-	tween.tween_property(enemy_node, "position", enemy_node.position + Vector2(0, push_down_amount), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(pipe_node, "position", pipe_node.position + Vector2(0, push_down_amount), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(bird_node, "position", bird_node.position + Vector2(0, push_down_amount), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(background_node, "position", background_node.position + Vector2(0, push_down_amount), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	var nodes_to_move = [enemy_node, pipe_node, self, background_node]
+	for node in nodes_to_move:
+		tween.tween_property(node, "position", node.position + Vector2(0, push_down_amount), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 	tween.tween_property(start, "position", Vector2(start.position.x, target_ui_y), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
