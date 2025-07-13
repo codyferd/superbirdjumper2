@@ -1,4 +1,4 @@
-extends Node2D
+extends Sprite2D
 
 const GRAVITY = 1000.0
 const JUMP_VELOCITY = -500.0
@@ -7,12 +7,13 @@ var velocity = Vector2.ZERO
 var is_dead = false
 
 @onready var audio_player = $audio
-@onready var start = $"../start"
+@onready var start = $"/root/main/start"
 @onready var enemy_node = $"../enemy"
-@onready var background_node = $"../background"
+@onready var background_node = $"/root/main/background"
 @onready var pipe_node = $"../pipemaster"
-@onready var score_node = $"../label/score"
-@onready var high_node = $"../start/high_score"
+@onready var score_node = $"/root/main/ui/score"
+@onready var high_node = $"/root/main/start/high_score"
+@onready var sprite = $"/root/main/sprites"
 
 func _ready():
 	if not get_tree().has_meta("from_restart") or get_tree().get_meta("from_restart") == false:
@@ -23,19 +24,21 @@ func _ready():
 	audio_player.play()
 	start.position.y = -500
 	start.visible = false
-
+	
 func _process(delta):
 	if is_dead:
 		return
 
 	velocity.y += GRAVITY * delta
 	position.y += velocity.y * delta
-	
-	var keys_pressed = 0
 
 	# --- Keyboard Input ---
-	if Input.is_key_pressed(KEY_A):
-		velocity.y = JUMP_VELOCITY * 0.1
+	if Input.is_key_pressed(KEY_W) and Input.is_key_pressed(KEY_A) and Input.is_key_pressed(KEY_D):
+		velocity.y = JUMP_VELOCITY * 4
+	elif Input.is_key_pressed(KEY_A) and Input.is_key_pressed(KEY_S) and Input.is_key_pressed(KEY_D):
+		velocity.y += GRAVITY * delta * 4
+	elif Input.is_key_pressed(KEY_A):
+		velocity.y = JUMP_VELOCITY * 0.01
 	elif Input.is_key_pressed(KEY_W):
 		velocity.y = JUMP_VELOCITY
 	elif Input.is_key_pressed(KEY_D):
@@ -44,7 +47,7 @@ func _process(delta):
 		velocity.y += GRAVITY * delta * 2
 
 	# Death by screen bounds
-	if position.y < 0 or position.y > 1080:
+	if position.y < 0 or position.y > 1000:
 		die()
 
 	# Death by enemy
@@ -73,7 +76,6 @@ func is_touching_pipe() -> bool:
 	return false
 
 func die():
-	
 	if is_dead:
 		return
 	

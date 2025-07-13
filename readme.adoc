@@ -1,6 +1,6 @@
 = *Super Bird Jumper 2*
 
-Version 2.2 Flamsjon
+Version 2.3 Skagern
 
 Find at https://github.com/codyferd/superbirdjumper2/
 

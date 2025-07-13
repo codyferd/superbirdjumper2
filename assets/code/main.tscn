@@ -1,211 +1,186 @@
-[gd_scene load_steps=17 format=3 uid="uid://bv0q1u8su7m4u"]
+[gd_scene load_steps=14 format=3 uid="uid://bv0q1u8su7m4u"]
 
+[ext_resource type="Script" uid="uid://b5mjsm7yfxcms" path="res://assets/code/main.gd" id="1_86a7r"]
 [ext_resource type="Texture2D" uid="uid://45jg35teh5hq" path="res://assets/images/background.webp" id="1_crnqq"]
 [ext_resource type="Texture2D" uid="uid://dxmtne5flkqbe" path="res://assets/images/bird.webp" id="1_g5k2s"]
 [ext_resource type="Script" uid="uid://ds5kwo8xs3kb6" path="res://assets/code/start.gd" id="1_l3qta"]
 [ext_resource type="Script" uid="uid://bawxlijd4vuni" path="res://assets/code/high_score.gd" id="3_de533"]
 [ext_resource type="Texture2D" uid="uid://c4y8cvs3lbshx" path="res://assets/images/enemy.webp" id="3_dljn1"]
 [ext_resource type="Script" uid="uid://b4xghyqk277ym" path="res://assets/code/bird.gd" id="3_j88tq"]
-[ext_resource type="AudioStream" uid="uid://cus162pyqbpwe" path="res://assets/audio/audio.ogg" id="4_fl8un"]
+[ext_resource type="AudioStream" uid="uid://weuo10b1f3dv" path="res://assets/audio/audio.ogg" id="4_fl8un"]
 [ext_resource type="Script" uid="uid://ce5n402a4h1gw" path="res://assets/code/enemy.gd" id="4_mmxch"]
 [ext_resource type="Script" uid="uid://btsafu3efo657" path="res://assets/code/fps.gd" id="5_i5w0c"]
 [ext_resource type="Texture2D" uid="uid://dr2y28dywyo58" path="res://assets/images/pipe.webp" id="9_db4g3"]
 [ext_resource type="Script" uid="uid://23n5xoi3xgky" path="res://assets/code/score.gd" id="9_l3qta"]
 [ext_resource type="Script" uid="uid://drkslh4rhfnnk" path="res://assets/code/pipemaster.gd" id="9_noool"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3qta"]
-size = Vector2(50, 57)
+[node name="main" type="Node2D"]
+script = ExtResource("1_86a7r")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_de533"]
-size = Vector2(54, 42)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aflkg"]
-size = Vector2(125, 1080)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1543"]
-size = Vector2(130, 1080)
-
-[node name="root" type="Node2D"]
-
-[node name="main" type="CharacterBody2D" parent="."]
-
-[node name="start" type="Control" parent="main"]
+[node name="start" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 script = ExtResource("1_l3qta")
 
-[node name="backgrounds" type="Sprite2D" parent="main/start"]
-position = Vector2(959, 542)
+[node name="backgrounds" type="TextureRect" parent="start"]
+layout_mode = 0
+offset_right = 2005.0
+offset_bottom = 1080.0
+scale = Vector2(1.00023, 0.932124)
 texture = ExtResource("1_crnqq")
 
-[node name="main_text" type="Label" parent="main/start"]
+[node name="main_text" type="Label" parent="start"]
 layout_mode = 0
-offset_left = 466.0
-offset_top = 254.0
-offset_right = 1434.0
-offset_bottom = 391.0
+offset_left = 501.0
+offset_top = 257.0
+offset_right = 1469.0
+offset_bottom = 394.0
 theme_override_font_sizes/font_size = 100
 text = "Super Bird Jumper 2"
 horizontal_alignment = 1
 
-[node name="quit_btn" type="Button" parent="main/start"]
+[node name="quit_btn" type="Button" parent="start"]
 layout_mode = 0
-offset_left = 895.0
+offset_left = 933.0
 offset_top = 544.0
-offset_right = 1008.0
+offset_right = 1046.0
 offset_bottom = 621.0
 theme_override_font_sizes/font_size = 50
 text = "Quit"
 
-[node name="start_btn" type="Button" parent="main/start"]
+[node name="start_btn" type="Button" parent="start"]
 layout_mode = 0
-offset_left = 858.0
+offset_left = 903.0
 offset_top = 418.0
-offset_right = 1041.0
+offset_right = 1086.0
 offset_bottom = 495.0
 theme_override_font_sizes/font_size = 50
 text = "Start"
 
-[node name="version" type="Label" parent="main/start"]
+[node name="high_score" type="Label" parent="start"]
 layout_mode = 0
-offset_left = 21.0
-offset_top = 1034.0
-offset_right = 220.0
-offset_bottom = 1062.0
-theme_override_font_sizes/font_size = 20
-text = "Version 2.2 Flamsjon"
-
-[node name="high_score" type="Label" parent="main/start"]
-layout_mode = 0
-offset_left = 773.0
-offset_top = 980.0
-offset_right = 1086.0
-offset_bottom = 1049.0
+offset_left = 825.0
+offset_top = 894.0
+offset_right = 1138.0
+offset_bottom = 963.0
 theme_override_font_sizes/font_size = 50
 text = "High Score: 0"
 script = ExtResource("3_de533")
 
-[node name="background" type="Sprite2D" parent="main"]
-position = Vector2(962, 538)
+[node name="background" type="TextureRect" parent="."]
+offset_right = 1995.0
+offset_bottom = 1080.0
+scale = Vector2(1.0037, 0.925654)
 texture = ExtResource("1_crnqq")
 
-[node name="enemy" type="Sprite2D" parent="main"]
-position = Vector2(1250, 500)
+[node name="sprites" type="Node2D" parent="."]
+
+[node name="enemy" type="Sprite2D" parent="sprites" groups=["pause"]]
+position = Vector2(1750, 500)
 texture = ExtResource("3_dljn1")
 script = ExtResource("4_mmxch")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/enemy"]
-position = Vector2(0, 1.5)
-shape = SubResource("RectangleShape2D_l3qta")
-
-[node name="bird" type="Sprite2D" parent="main"]
+[node name="bird" type="Sprite2D" parent="sprites" groups=["pause"]]
 position = Vector2(250, 500)
 texture = ExtResource("1_g5k2s")
 script = ExtResource("3_j88tq")
 
-[node name="audio" type="AudioStreamPlayer2D" parent="main/bird"]
+[node name="audio" type="AudioStreamPlayer2D" parent="sprites/bird"]
 stream = ExtResource("4_fl8un")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/bird"]
-position = Vector2(-1, -4)
-shape = SubResource("RectangleShape2D_de533")
-
-[node name="pipemaster" type="Sprite2D" parent="main"]
-position = Vector2(250, 500)
-scale = Vector2(1, 0.997222)
+[node name="pipemaster" type="Node2D" parent="sprites" groups=["pause"]]
 script = ExtResource("9_noool")
 
-[node name="pipe1" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(0, -1000)
-scale = Vector2(1, 1.72717)
+[node name="pipe1" type="Sprite2D" parent="sprites/pipemaster"]
+position = Vector2(250, -500)
+scale = Vector2(1, 1.5)
 texture = ExtResource("9_db4g3")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe1"]
-position = Vector2(0.5, -0.266235)
-shape = SubResource("RectangleShape2D_aflkg")
-
-[node name="pipe2" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(500, -1000)
-scale = Vector2(1, 1.727)
+[node name="pipe2" type="Sprite2D" parent="sprites/pipemaster"]
+position = Vector2(750, -500)
+scale = Vector2(1, 1.5)
 texture = ExtResource("9_db4g3")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe2"]
-position = Vector2(0.5, -0.266235)
-shape = SubResource("RectangleShape2D_aflkg")
-
-[node name="pipe3" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(1000, -1000)
-scale = Vector2(1, 1.727)
+[node name="pipe3" type="Sprite2D" parent="sprites/pipemaster"]
+position = Vector2(1250, -500)
+scale = Vector2(1, 1.5)
 texture = ExtResource("9_db4g3")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe3"]
-position = Vector2(0.5, -0.266235)
-shape = SubResource("RectangleShape2D_aflkg")
-
-[node name="pipe4" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(1500, -1000)
-scale = Vector2(1, 1.727)
+[node name="pipe4" type="Sprite2D" parent="sprites/pipemaster"]
+position = Vector2(1750, -500)
+scale = Vector2(1, 1.5)
 texture = ExtResource("9_db4g3")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe4"]
-position = Vector2(0.5, -0.266235)
-shape = SubResource("RectangleShape2D_aflkg")
-
-[node name="pipe5" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(0, 1000)
-scale = Vector2(1, 1.37785)
+[node name="pipe5" type="Sprite2D" parent="sprites/pipemaster"]
+position = Vector2(250, 1500)
+scale = Vector2(1, 1.5)
 texture = ExtResource("9_db4g3")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe5"]
-position = Vector2(1, -3.81104)
-shape = SubResource("RectangleShape2D_l1543")
-
-[node name="pipe6" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(500, 1000)
-scale = Vector2(1, 1.378)
+[node name="pipe6" type="Sprite2D" parent="sprites/pipemaster"]
+position = Vector2(750, 1500)
+scale = Vector2(1, 1.5)
 texture = ExtResource("9_db4g3")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe6"]
-position = Vector2(1, -1.47192)
-shape = SubResource("RectangleShape2D_l1543")
-
-[node name="pipe7" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(1000, 1000)
-scale = Vector2(1, 1.378)
+[node name="pipe7" type="Sprite2D" parent="sprites/pipemaster"]
+position = Vector2(1250, 1500)
+scale = Vector2(1, 1.5)
 texture = ExtResource("9_db4g3")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe7"]
-position = Vector2(1, -1.47192)
-shape = SubResource("RectangleShape2D_l1543")
-
-[node name="pipe8" type="Sprite2D" parent="main/pipemaster"]
-position = Vector2(1500, 1000)
-scale = Vector2(1, 1.378)
+[node name="pipe8" type="Sprite2D" parent="sprites/pipemaster"]
+position = Vector2(1750, 1500)
+scale = Vector2(1, 1.5)
 texture = ExtResource("9_db4g3")
 
-[node name="hitbox" type="CollisionShape2D" parent="main/pipemaster/pipe8"]
-position = Vector2(1, -1.47192)
-shape = SubResource("RectangleShape2D_l1543")
-
-[node name="label" type="CanvasLayer" parent="main"]
-
-[node name="fps" type="Label" parent="main/label"]
+[node name="ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("5_i5w0c")
+offset_bottom = 40.0
 
-[node name="score" type="Label" parent="main/label"]
+[node name="shader" type="ColorRect" parent="ui"]
+visible = false
+layout_mode = 0
+offset_right = 2007.0
+offset_bottom = 1004.0
+color = Color(0, 0, 0, 0.392157)
+
+[node name="pause" type="Button" parent="ui"]
+layout_mode = 0
+offset_left = 171.0
+offset_top = 31.0
+offset_right = 236.0
+offset_bottom = 176.0
+rotation = 1.57207
+theme_override_font_sizes/font_size = 100
+text = "="
+
+[node name="score" type="Label" parent="ui" groups=["pause"]]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -105.0
-offset_right = 167.0
-offset_bottom = 99.0
+offset_left = 883.0
+offset_top = 10.0
+offset_right = 1155.0
+offset_bottom = 109.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 50
 text = "Score: 0"
 script = ExtResource("9_l3qta")
+
+[node name="fps" type="Label" parent="ui"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("5_i5w0c")
+
+[node name="version" type="Label" parent="ui"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 952.0
+offset_right = 217.0
+offset_bottom = 980.0
+theme_override_font_sizes/font_size = 20
+text = "Version 2.3 Skagern"
+
+[connection signal="pressed" from="ui/pause" to="." method="_on_pause_pressed"]

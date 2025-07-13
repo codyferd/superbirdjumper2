@@ -1,7 +1,7 @@
-extends Node2D  # Attach this to your "pipemaster" node
+extends Node2D
 
 const START_X      := 1000       # Starting X position (off-screen right)
-const END_X        := -500       # When pipes go off-screen left
+const END_X        := 0          # When pipes go off-screen left
 const SPEED        := 500        # Speed of movement
 const PAIR_SPACING := 500        # Distance between pipe pairs
 
@@ -21,7 +21,7 @@ func _ready():
 		var start_x = START_X + i * PAIR_SPACING
 
 		# Add random offset
-		var offset_y = randf_range(-200, 200)
+		var offset_y = randf_range(-250, 250)
 
 		for pipe in pair:
 			pipe.position.x = start_x
@@ -34,7 +34,7 @@ func _process(delta):
 		if x <= END_X:
 			x += PAIR_SPACING * pipe_pairs.size()  # wrap around
 
-			# Random vertical offset between -250 and +250
+			# Random vertical offset between -200 and +200
 			var offset_y = randf_range(-250, 250)
 			for pipe in pair:
 				pipe.position.y += offset_y

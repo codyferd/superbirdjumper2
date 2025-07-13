@@ -11,7 +11,7 @@ func _process(delta):
 
 	time_passed += delta
 
-	if not started and time_passed >= 0.66:
+	if not started and time_passed >= 0.5:
 		started = true
 		time_passed = 0.0
 	elif started and time_passed >= 1:
