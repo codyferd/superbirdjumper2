@@ -1,6 +1,6 @@
 = *Super Bird Jumper 2*
 
-Version 2.3 Skagern
+Version 2.4 Saimaa
 
 Find at https://github.com/codyferd/superbirdjumper2/
 

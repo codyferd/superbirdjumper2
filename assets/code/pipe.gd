@@ -6,6 +6,7 @@ const SPEED        := 500        # Speed of movement
 const PAIR_SPACING := 500        # Distance between pipe pairs
 
 var pipe_pairs = []
+var base_y_positions = {}
 
 func _ready():
 	pipe_pairs = [
@@ -15,30 +16,32 @@ func _ready():
 		[get_node("pipe4"), get_node("pipe8")]
 	]
 
-	# Set starting positions for each pair
+	# Store base Y positions
+	for pair in pipe_pairs:
+		for pipe in pair:
+			base_y_positions[pipe] = pipe.position.y
+
+	# Set starting positions
 	for i in range(pipe_pairs.size()):
 		var pair = pipe_pairs[i]
 		var start_x = START_X + i * PAIR_SPACING
 
-		# Add random offset
-		var offset_y = randf_range(-250, 250)
+		var offset_y = randf_range(-500, 500)
 
 		for pipe in pair:
 			pipe.position.x = start_x
-			pipe.position.y += offset_y
+			pipe.position.y = base_y_positions[pipe] + offset_y
 
 func _process(delta):
 	for pair in pipe_pairs:
 		var x = pair[0].position.x - SPEED * delta
 
 		if x <= END_X:
-			x += PAIR_SPACING * pipe_pairs.size()  # wrap around
+			x += PAIR_SPACING * pipe_pairs.size()
 
-			# Random vertical offset between -200 and +200
-			var offset_y = randf_range(-250, 250)
+			var offset_y = randf_range(-500, 500)
 			for pipe in pair:
-				pipe.position.y += offset_y
+				pipe.position.y = base_y_positions[pipe] + offset_y
 
-		# Apply same new X position
 		for pipe in pair:
 			pipe.position.x = x

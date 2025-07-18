@@ -16,8 +16,8 @@ func _ready():
 func start_x_loop():
 	x_tween = create_tween()
 	x_tween.set_loops()
-	x_tween.tween_property(self, "position:x", 1750, 2.5)
-	x_tween.tween_property(self, "position:x", 250, 2.5)
+	x_tween.tween_property(self, "position:x", 1750, 10)
+	x_tween.tween_property(self, "position:x", 250, 10)
 
 func do_random_y_tween():
 	if is_paused:
@@ -28,7 +28,7 @@ func do_random_y_tween():
 	y_tween.tween_property(self, "position:y", new_y, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	y_tween.tween_callback(Callable(self, "do_random_y_tween"))
 
-func push_down(amount: float = 1000):
+func push_down(_amount: float = 1000):
 	if y_tween:
 		y_tween.kill()
 

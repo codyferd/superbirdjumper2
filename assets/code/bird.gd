@@ -8,12 +8,12 @@ var is_dead = false
 
 @onready var audio_player = $audio
 @onready var start = $"/root/main/start"
-@onready var enemy_node = $"../enemy"
-@onready var background_node = $"/root/main/background"
-@onready var pipe_node = $"../pipemaster"
-@onready var score_node = $"/root/main/ui/score"
-@onready var high_node = $"/root/main/start/high_score"
-@onready var sprite = $"/root/main/sprites"
+@onready var enemy = $"../enemy"
+@onready var background = $"/root/main/background"
+@onready var pipemaster = $"../pipe"
+@onready var score = $"/root/main/ui/score"
+@onready var high = $"/root/main/start/high_score"
+@onready var sprite = $"/root/main/game"
 
 func _ready():
 	if not get_tree().has_meta("from_restart") or get_tree().get_meta("from_restart") == false:
@@ -33,12 +33,12 @@ func _process(delta):
 	position.y += velocity.y * delta
 
 	# --- Keyboard Input ---
-	if Input.is_key_pressed(KEY_W) and Input.is_key_pressed(KEY_A) and Input.is_key_pressed(KEY_D):
+	if Input.is_key_pressed(KEY_E):
 		velocity.y = JUMP_VELOCITY * 4
-	elif Input.is_key_pressed(KEY_A) and Input.is_key_pressed(KEY_S) and Input.is_key_pressed(KEY_D):
+	elif Input.is_key_pressed(KEY_Q):
 		velocity.y += GRAVITY * delta * 4
 	elif Input.is_key_pressed(KEY_A):
-		velocity.y = JUMP_VELOCITY * 0.01
+		velocity.y = JUMP_VELOCITY * 0.03
 	elif Input.is_key_pressed(KEY_W):
 		velocity.y = JUMP_VELOCITY
 	elif Input.is_key_pressed(KEY_D):
@@ -51,8 +51,8 @@ func _process(delta):
 		die()
 
 	# Death by enemy
-	var dist_x = abs(self.position.x - enemy_node.position.x)
-	var dist_y = abs(self.position.y - enemy_node.position.y)
+	var dist_x = abs(self.position.x - enemy.position.x)
+	var dist_y = abs(self.position.y - enemy.position.y)
 	if dist_x <= 50 and dist_y <= 50:
 		die()
 
@@ -61,7 +61,7 @@ func _process(delta):
 		die()
 
 func is_touching_pipe() -> bool:
-	for pipe in pipe_node.get_children():
+	for pipe in pipemaster.get_children():
 		if pipe is Sprite2D and pipe.texture:
 			var pipe_rect = Rect2(
 				pipe.global_position - (pipe.texture.get_size() * 0.5 * pipe.scale),
@@ -81,16 +81,16 @@ func die():
 	
 	is_dead = true
 	start.visible = true
-	score_node.visible = true
+	score.visible = true
 
 	var push_down_amount = 10000
 	var target_ui_y = 0
-	score_node.frozen = true
-	high_node.frozen = true
-	enemy_node.push_down(push_down_amount)
+	score.frozen = true
+	high.frozen = true
+	enemy.push_down(push_down_amount)
 
 	var tween = create_tween()
-	var nodes_to_move = [enemy_node, pipe_node, self, background_node]
+	var nodes_to_move = [enemy, pipemaster, self, background]
 	for node in nodes_to_move:
 		tween.tween_property(node, "position", node.position + Vector2(0, push_down_amount), 0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 

@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 var is_paused := false
 
@@ -9,7 +9,7 @@ func _ready():
 	pauses.pressed.connect(toggle_pause)
 	shader.hide()
 
-func _process(delta):
+func _process(_delta):
 	if is_paused == false:
 		shader.hide()
 
